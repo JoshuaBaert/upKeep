@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="upKeep">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>upKeep</title>
+		<link rel="stylesheet" media="screen" href="dist/style.css">
 	</head>
-	<body>
+	<body ng-controller="mainCtrl">
 		
+		<ui-view></ui-view>
 		
+		{{notWorking}}
 		
+		<script
+				src="https://code.jquery.com/jquery-3.1.1.js"
+				integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+				crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+		<script src="./dist/bundle.js"></script>
+		<!--<script></script>-->
 	</body>
 </html>
