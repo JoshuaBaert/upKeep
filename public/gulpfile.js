@@ -55,8 +55,8 @@ gulp.task('build-js', function () {
 gulp.task('build', ['clean', 'build-css', 'build-js'], function () {
 	return gulp.src('index.html')
 			.pipe(cacheBust.references())
-			.pipe(gulp.dest('dist'))
-			.pipe(livereload());
+			.pipe(gulp.dest('dist'));
+//			.pipe(livereload());
 });
 
 

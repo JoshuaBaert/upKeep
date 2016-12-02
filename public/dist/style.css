@@ -409,6 +409,12 @@ template {
 body {
   box-sizing: border-box; }
 
+a:visited {
+  text-decoration: none; }
+
+a:link {
+  text-decoration: none; }
+
 input {
   text-align: center; }
 
@@ -506,5 +512,19 @@ input {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center; }
+
+.user-view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row; }
+  .user-view .nav-main {
+    height: 100%;
+    width: 20%; }
 
 /*# sourceMappingURL=maps/style.css.map */

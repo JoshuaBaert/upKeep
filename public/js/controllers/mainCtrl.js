@@ -3,5 +3,6 @@
  */
 
 angular.module('upKeep').controller('mainCtrl', function ($scope, mainSvc) {
-	$scope.notWorking = 'working'
+	$scope.notWorking = 'working';
+	
 });

@@ -3,19 +3,33 @@
   
 */
 
-$mainColor : #66C7F4;
-$secondColor : #B2FFD6;
-$lightColor : #FEFEFE;
-
-
+$mainColor: #66C7F4;
+$secondColor: #B2FFD6;
+$lightColor: #FEFEFE;
 
 body {
   box-sizing: border-box;
 }
 
+
+
+a:visited {
+  text-decoration: none;
+}
+
+
+
+a:link {
+  text-decoration: none;
+}
+
+
+
 input {
   text-align: center;
 }
+
+
 
 .login-main {
   padding: 50px 10px 0;
@@ -24,7 +38,6 @@ input {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  
   
   .login-logo {
     height: 150px;
@@ -78,3 +91,17 @@ input {
     align-items: center;
   }
 }
+
+
+
+.user-view {
+  display: flex;
+  flex-direction: row;
+  
+  
+  .nav-main {
+    height: 100%;
+    width: 20%;
+  }
+}
+
