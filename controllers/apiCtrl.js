@@ -11,23 +11,18 @@ var testUser = {
 	allowText: true,
 	lists: [
 		{
-			name: 'Civic',
-			icon: 'fa-th-list',
+			name: 'Home',
+			icon: 'fa-home',
 			items: [
 				{
-					name: 'Fuel Filter',
-					description: 'Change the fuel filter',
+					name: 'Heater air filter',
+					description: 'Change the air filter',
 					date: '2017/10/01',
 				},
 				{
-					name: 'Tires',
-					description: 'Get new tires',
+					name: 'seed lawn',
+					description: 'seed lawn',
 					date: '2017/06/01',
-				},
-				{
-					name: 'Wiper blades',
-					description: 'Change the wiper blades for winter',
-					date: '2017/10/01',
 				},
 			]
 			

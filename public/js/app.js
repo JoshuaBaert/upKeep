@@ -4,6 +4,7 @@
 
 angular.module('upKeep', ['ui.router'])
 	.config(function ($stateProvider, $urlRouterProvider) {
+		$urlRouterProvider.when('/', '/home');
 		$stateProvider
 			.state('login', {
 				url: '/login',
@@ -11,16 +12,21 @@ angular.module('upKeep', ['ui.router'])
 			})
 			.state('user', {
 				url: '/',
-				templateUrl: './views/user.html'
+				templateUrl: './views/user.html',
 			})
 			.state('user.home', {
 				url: "home",
 				templateUrl: './views/home.html'
 			})
+			.state('user.settings', {
+				url: "settings",
+				templateUrl: './views/settings.html'
+			})
 			.state('user.list', {
 				url: 'list',
 				templateUrl: './views/list.html'
 			});
-		$urlRouterProvider.otherwise('/login')
+		$urlRouterProvider
+			.otherwise('/login');
 		
 	});

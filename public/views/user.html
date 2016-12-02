@@ -1,8 +1,14 @@
 <div class="user-view" ng-controller="userCtrl">
 	<div class="nav-main">
+		<a ui-sref="user.home">
 		<div class="mini-Logo btn"><i class="fa fa-user-circle icon" aria-hidden="true"></i></div>
+		</a>
+		<a ui-sref="user.settings">
 		<div class="user-setting btn"><i class="fa fa-cog icon" aria-hidden="true"></i></div>
+		</a>
+		<a ui-sref="">
 		<div class="btn" ng-repeat="list in user.lists"><i class="fa {{list.icon}} icon" aria-hidden="true"></i></div>
+		</a>
 	</div>
 	
 	<ui-view></ui-view>
