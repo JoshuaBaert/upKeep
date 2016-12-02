@@ -405,8 +405,106 @@ template {
 /*
   upKeep for fun
   
-  
- 
 */
+body {
+  box-sizing: border-box; }
+
+input {
+  text-align: center; }
+
+.login-main {
+  padding: 50px 10px 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .login-main .login-logo {
+    height: 150px;
+    width: 270px;
+    text-align: center; }
+  .login-main .login-auth {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    .login-main .login-auth .google-btn {
+      margin: 5px;
+      color: #FEFEFE;
+      background-color: #dd4b39;
+      height: 75px;
+      width: 130px;
+      border-radius: 15px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center; }
+    .login-main .login-auth .facebook-btn {
+      margin: 5px;
+      color: #FEFEFE;
+      background-color: #3b5998;
+      height: 75px;
+      width: 130px;
+      border-radius: 15px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center; }
+  .login-main .login-input {
+    width: 270px;
+    margin: 5px 0; }
+  .login-main .sign-up {
+    margin: 5px;
+    color: #FEFEFE;
+    background-color: #66C7F4;
+    height: 75px;
+    width: 130px;
+    border-radius: 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
 
 /*# sourceMappingURL=maps/style.css.map */

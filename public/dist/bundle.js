@@ -5,10 +5,20 @@
  */
 
 angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
-	$stateProvider.state('home', {
+	$stateProvider.state('login', {
+		url: '/login',
+		templateUrl: './views/login.html'
+	}).state('user', {
 		url: '/',
-		templateUrl: '../views/home/html'
+		templateUrl: './views/user.html'
+	}).state('user.home', {
+		url: "home",
+		templateUrl: './views/home.html'
+	}).state('user.list', {
+		url: 'list',
+		templateUrl: './views/list.html'
 	});
+	$urlRouterProvider.otherwise('/login');
 });
 'use strict';
 

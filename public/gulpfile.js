@@ -11,6 +11,7 @@ var concat = require('gulp-concat');
 var print = require('gulp-print');
 var babel = require('gulp-babel');
 var autoPrefixer = require('gulp-autoprefixer');
+var livereload = require('gulp-livereload');
 
 var CacheBuster = require('gulp-cachebust');
 var cacheBust = new CacheBuster();
@@ -34,6 +35,7 @@ gulp.task('build-css', function () {
 			.pipe(concat('style.css'))
 			.pipe(sourcemaps.write('./maps'))
 			.pipe(gulp.dest('./dist'))
+			.pipe(livereload());
 });
 
 
@@ -45,18 +47,21 @@ gulp.task('build-js', function () {
 			.pipe(concat('bundle.js'))
 			//			.pipe(uglify())
 			.pipe(sourcemaps.write('./maps'))
-			.pipe(gulp.dest('./dist'));
+			.pipe(gulp.dest('./dist'))
+			.pipe(livereload());
 });
 
 
 gulp.task('build', ['clean', 'build-css', 'build-js'], function () {
 	return gulp.src('index.html')
 			.pipe(cacheBust.references())
-			.pipe(gulp.dest('dist'));
+			.pipe(gulp.dest('dist'))
+			.pipe(livereload());
 });
 
 
 
 gulp.task('watch', function () {
-	return gulp.watch(['./index.html', './styles/*.*ss', './js/**/*.js'], ['build']);
+	livereload.listen();
+	gulp.watch(['./index.html', './views/*.html' , './styles/*.*ss', './js/**/*.js'], ['build']);
 });

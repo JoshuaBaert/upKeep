@@ -1,6 +1,80 @@
 /*
   upKeep for fun
   
-  
- 
 */
+
+$mainColor : #66C7F4;
+$secondColor : #B2FFD6;
+$lightColor : #FEFEFE;
+
+
+
+body {
+  box-sizing: border-box;
+}
+
+input {
+  text-align: center;
+}
+
+.login-main {
+  padding: 50px 10px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  
+  
+  .login-logo {
+    height: 150px;
+    width: 270px;
+    text-align: center;
+    
+  }
+  
+  .login-auth {
+    display: flex;
+    flex-direction: row;
+    
+    .google-btn {
+      margin: 5px;
+      color: $lightColor;
+      background-color: #dd4b39;
+      height: 75px;
+      width: 130px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .facebook-btn {
+      margin: 5px;
+      color: $lightColor;
+      background-color: #3b5998;
+      height: 75px;
+      width: 130px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .login-input {
+    width: 270px;
+    margin: 5px 0;
+  }
+  
+  .sign-up {
+    margin: 5px;
+    color: $lightColor;
+    background-color: $mainColor;
+    height: 75px;
+    width: 130px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
