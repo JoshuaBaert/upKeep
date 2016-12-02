@@ -11,8 +11,7 @@ angular.module('upKeep', ['ui.router'])
 			})
 			.state('user', {
 				url: '/',
-				templateUrl: './views/user.html',
-				controller:'userCtrl'
+				templateUrl: './views/user.html'
 			})
 			.state('user.home', {
 				url: "home",
@@ -23,4 +22,5 @@ angular.module('upKeep', ['ui.router'])
 				templateUrl: './views/list.html'
 			});
 		$urlRouterProvider.otherwise('/login')
+		
 	});

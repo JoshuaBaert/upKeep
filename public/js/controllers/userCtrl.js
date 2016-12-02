@@ -4,6 +4,7 @@
 
 angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc) {
 	mainSvc.getUser().then(function (res) {
-		console.log(res.data)
+		console.log(res.data);
+		$scope.user = res.data;
 	})
 });

@@ -100,8 +100,34 @@ input {
   
   
   .nav-main {
-    height: 100%;
-    width: 20%;
+    height: 100vh;
+    width: 20vw;
+    background-color: $mainColor;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    
+    .btn {
+      margin: 1vw;
+      width: 18vw;
+      height: 18vw;
+      background-color: $secondColor;
+      border-radius: 10px;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mini-Logo {
+      
+    }
+    
+    .user-setting-btn {
+      
+    }
+    .icon {
+      font-size: 14vw;
+    }
   }
 }
 

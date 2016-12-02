@@ -10,8 +10,7 @@ angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRou
 		templateUrl: './views/login.html'
 	}).state('user', {
 		url: '/',
-		templateUrl: './views/user.html',
-		controller: 'userCtrl'
+		templateUrl: './views/user.html'
 	}).state('user.home', {
 		url: "home",
 		templateUrl: './views/home.html'
@@ -39,6 +38,7 @@ angular.module('upKeep').controller('mainCtrl', function ($scope, mainSvc) {
 angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc) {
 	mainSvc.getUser().then(function (res) {
 		console.log(res.data);
+		$scope.user = res.data;
 	});
 });
 'use strict';
