@@ -6,8 +6,8 @@
 		<a ui-sref="user.settings">
 		<div class="user-setting btn"><i class="fa fa-cog icon" aria-hidden="true"></i></div>
 		</a>
-		<a ui-sref="">
-		<div class="btn" ng-repeat="list in user.lists"><i class="fa {{list.icon}} icon" aria-hidden="true"></i></div>
+		<a ui-sref="user.list">
+		<div class="list-logo btn" ng-repeat="list in user.lists"><i class="fa {{list.icon}} icon" aria-hidden="true"></i></div>
 		</a>
 	</div>
 	

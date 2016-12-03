@@ -23,6 +23,24 @@ angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRou
 		templateUrl: './views/list.html'
 	});
 	$urlRouterProvider.otherwise('/login');
+}).directive('openCreate', function () {
+	return {
+		restrict: 'A',
+		link: function link(scope, element, attrs) {
+			$(element).on('click', function () {
+				$('.side-panel').css('width', '70vw');
+			});
+		}
+	};
+}).directive('closeCreate', function () {
+	return {
+		restrict: 'A',
+		link: function link(scope, element, attrs) {
+			$(element).on('click', function () {
+				$('.side-panel').css('width', '0');
+			});
+		}
+	};
 });
 'use strict';
 

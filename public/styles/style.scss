@@ -128,6 +128,11 @@ body {
     .user-setting-btn {
       
     }
+    
+    .list-logo {
+      margin: 1vw 1vw 2vw;
+    }
+    
     .icon {
       font-size: 14vw;
     }
@@ -187,8 +192,8 @@ body {
       .edit-btn {
         margin: 10px 0;
         background-color: $mainColor;
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
         border-radius: 5px;
         display: flex;
         align-items: center;
@@ -199,7 +204,69 @@ body {
     }
     
   }
-;
+  
+  .create {
+    position: fixed;
+    bottom: 5vw;
+    right: 5vw;
+    height: 16vw;
+    width: 16vw;
+    background-color: $mainColor;
+    border-radius: 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .icon {
+      font-size: 10vw;
+    }
+  }
+  
+  .side-panel {
+    margin: 0;
+    padding: 0;
+    background-color: $lightColor;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 0;
+    border-left: solid $secondColor 1vw;
+    transition: all 0.5s;
+    
+    .close {
+      position: absolute;
+      top: 2vw;
+      left: 2vw;
+      height: 8vw;
+      width: 8vw;
+      background-color: $mainColor;
+      border-radius: 4vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .icon {
+        font-size: 4vw;
+      }
+    }
+    
+    
+    .btns {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      
+    }
+  }
+  
+}
+
+
+
+.hide {
+  display: none;
+  transition: all 0.5s;
 }
 
 
