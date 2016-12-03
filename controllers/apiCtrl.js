@@ -63,5 +63,17 @@ module.exports = {
 		res.json(users[0])
 	},
 	
+	putUser: function (req, res, next) {
+		console.log(req.body);
+		var body = req.body;
+		users[0].firstName = body.firstName;
+		users[0].lastName = body.lastName;
+		users[0].email = body.email;
+		users[0].phoneNumber = body.phoneNumber;
+		users[0].allowEmail = body.allowEmail;
+		users[0].allowText = body.allowText;
+		
+		res.sendStatus(200)
+	}
 	
 };

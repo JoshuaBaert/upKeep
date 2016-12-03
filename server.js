@@ -7,6 +7,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const massive = require('massive');
+const cors = require('cors');
 
 const apiCtrl = require('./controllers/apiCtrl');
 
@@ -24,19 +26,22 @@ passport.use(new GoogleStrategy({
 
 // prep to put on session
 passport.serializeUser(function (user, cb) {
-	console.log('Serialized User');
 	cb(null, user);
 });
 // gets data from session prep for req.user
 passport.deserializeUser(function (obj, cb) {
-	console.log('Deserialized User');
 	cb(null, obj);
 });
 
-var app = express();
+var app = module.exports = express();
+
+app.set('db', massive.connectSync({
+	connectionString: 'postgres://postgres:test123@localhost/test',
+}));
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(session({secret: config.secret, saveUninitialized: true, resave: false,}));
 
@@ -48,7 +53,11 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 app.get('/auth/google/callback', function (req, res, next) {next();}, passport.authenticate('google', {successRedirect: 'http://localhost:8080/#/', failureRedirect: '/login'}), function (req, res) {res.redirect('http://localhost:8080/#/');});
 
 
+
 app.get('/api/user', apiCtrl.getUser);
+
+
+app.put('/api/user', apiCtrl.putUser);
 
 
 
