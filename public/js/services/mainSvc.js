@@ -10,6 +10,16 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		})
 	};
 	
+	this.postList = function (name, icon) {
+		var list = {
+			name: name,
+			icon: icon,
+			items: []
+		};
+		
+		$http.post('/api/lists', list);
+	};
+	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
 		$http.put('/api/user',
 			{
@@ -21,4 +31,14 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 				allowText: aText
 			});
 	};
+	
+	this.putList = function (listIndex, name, icon) {
+		$http.put('/api/list', {
+			name: name,
+			icon: icon,
+			index: listIndex
+		})
+	}
+	
+	
 });

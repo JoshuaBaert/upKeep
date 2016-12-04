@@ -54,10 +54,14 @@ app.get('/auth/google/callback', function (req, res, next) {next();}, passport.a
 
 
 
-app.get('/api/user', apiCtrl.getUser);
+app.get('/api/user', apiCtrl.readUser);
 
 
-app.put('/api/user', apiCtrl.putUser);
+app.post('/api/lists', apiCtrl.createList);
+
+
+app.put('/api/user', apiCtrl.updateUser);
+app.put('/api/list', apiCtrl.updateList);
 
 
 

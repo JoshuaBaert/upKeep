@@ -30,7 +30,10 @@
 		<input class="setcheck" type="checkbox" ng-model="user.allowText">
 	</div>
 	
-	<div class="btn" ng-click="putUser()">Save</div>
 	
-	<button ng-click="getUser()">User</button>
+	<div class="btns">
+		<a ui-sref="user.home.new"><div class="btn" ng-click="putUser()">Save  </div></a>
+		<a ui-sref="user.home.new"><div class="btn" ng-click="getUser()">Cancel</div></a>
+	</div>
+	
 </div>

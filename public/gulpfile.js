@@ -63,5 +63,5 @@ gulp.task('build', ['clean', 'build-css', 'build-js'], function () {
 
 gulp.task('watch', function () {
 	livereload.listen();
-	gulp.watch(['./index.html', './views/*.html' , './styles/*.*ss', './js/**/*.js'], ['build']);
+	gulp.watch(['./index.html', './views/**/*.html' , './styles/*.*ss', './js/**/*.js'], ['build']);
 });

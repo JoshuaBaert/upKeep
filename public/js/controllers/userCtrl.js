@@ -2,12 +2,24 @@
  * Created by Joshua Baert on 12/2/2016.
  */
 
-angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stateParams) {
+angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stateParams, $state) {
+	
+	$scope.newList = {
+		name: undefined,
+		icon: undefined
+	};
+	
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			console.log('got user');
 			$scope.user = res.data;
 		});
+	};
+	
+	$scope.postList = function () {
+		if ($scope.newList.name && $scope.newList.icon) {
+			mainSvc.postList($scope.newList.name, $scope.newList.icon);
+			$state.reload();
+		}
 	};
 	
 	$scope.putUser = function () {
@@ -20,19 +32,13 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 			$scope.user.allowEmail,
 			$scope.user.allowText
 		)
-		
 	};
+	
+	
 	
 	$scope.index = $stateParams.index;
 	
 	$scope.getUser();
 	
-})
-	.controller('listCtrl', function ($scope, $stateParams, mainSvc) {
-		
-		mainSvc.getUser().then(function (res) {
-			$scope.user = res.data;
-			$scope.list = res.data.lists[$stateParams.index]
-		});
-		
-	});
+});
+	

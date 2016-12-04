@@ -61,27 +61,39 @@ var testUser = {
 	]
 };
 
-var users = [
-	testUser,
-];
+
 
 
 module.exports = {
-	getUser: function (req, res, next) {
-		res.json(users[0])
+	readUser: function (req, res, next) {
+		res.json(testUser)
 	},
 	
-	putUser: function (req, res, next) {
+	createList: function (req, res, next) {
+		console.log(req.body);
+		testUser.lists.push(req.body);
+		res.sendStatus(200);
+	},
+	
+	updateUser: function (req, res, next) {
 		console.log(req.body);
 		var body = req.body;
-		users[0].firstName = body.firstName;
-		users[0].lastName = body.lastName;
-		users[0].email = body.email;
-		users[0].phoneNumber = body.phoneNumber;
-		users[0].allowEmail = body.allowEmail;
-		users[0].allowText = body.allowText;
+		testUser.firstName = body.firstName;
+		testUser.lastName = body.lastName;
+		testUser.email = body.email;
+		testUser.phoneNumber = body.phoneNumber;
+		testUser.allowEmail = body.allowEmail;
+		testUser.allowText = body.allowText;
 		
-		res.sendStatus(200)
+		res.sendStatus(200);
+	},
+	updateList: function (req, res, next) {
+		var body = req.body;
+		testUser.lists[body.index].name = body.name;
+		testUser.lists[body.index].icon = body.icon;
+		res.sendStatus(200);
 	}
+	
+	
 	
 };

@@ -14,17 +14,27 @@ angular.module('upKeep', ['ui.router'])
 				url: '/',
 				templateUrl: './views/user.html',
 			})
-			.state('user.home', {
-				url: "home",
-				templateUrl: './views/home.html'
-			})
 			.state('user.settings', {
 				url: "settings",
 				templateUrl: './views/settings.html'
 			})
+			.state('user.home', {
+				url: "",
+				templateUrl: './views/home.html'
+			})
+				.state('user.home.new', {
+					url: "home",
+					templateUrl: './views/side/newList.html'
+				})
+				.state('user.home.edit', {
+					url: 'home/edit/:index',
+					templateUrl: './views/side/editList.html',
+					reload: true
+				})
 			.state('user.list', {
-				url: 'list/:index',
+				url: '',
 				templateUrl: './views/list.html'
-			});
+			})
+				.state('user.list.new');
 		$urlRouterProvider.otherwise('/');
 	});

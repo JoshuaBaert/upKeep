@@ -12,16 +12,23 @@ angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRou
 	}).state('user', {
 		url: '/',
 		templateUrl: './views/user.html'
-	}).state('user.home', {
-		url: "home",
-		templateUrl: './views/home.html'
 	}).state('user.settings', {
 		url: "settings",
 		templateUrl: './views/settings.html'
+	}).state('user.home', {
+		url: "",
+		templateUrl: './views/home.html'
+	}).state('user.home.new', {
+		url: "home",
+		templateUrl: './views/side/newList.html'
+	}).state('user.home.edit', {
+		url: 'home/edit/:index',
+		templateUrl: './views/side/editList.html',
+		reload: true
 	}).state('user.list', {
-		url: 'list/:index',
+		url: '',
 		templateUrl: './views/list.html'
-	});
+	}).state('user.list.new');
 	$urlRouterProvider.otherwise('/');
 });
 'use strict';
@@ -29,7 +36,18 @@ angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRou
 /**
  * Created by Joshua Baert on 12/2/2016.
  */
-angular.module('upKeep').directive('closeCreate', function () {
+
+var openSpeed = 100;
+var openWidth = '101vw';
+
+angular.module('upKeep').directive('getUser', function () {
+	return {
+		restrict: 'E',
+		link: function link(scope, element, attrs) {
+			scope.getUser();
+		}
+	};
+}).directive('closeCreate', function () {
 	return {
 		restrict: 'A',
 		link: function link(scope, element, attrs) {
@@ -44,8 +62,19 @@ angular.module('upKeep').directive('closeCreate', function () {
 		link: function link(scope, element, attrs) {
 			$(element).on('click', function () {
 				setTimeout(function () {
-					$('.side-panel').css('width', '65vw');
-				}, 1);
+					$('.side-panel').css('width', openWidth);
+				}, openSpeed);
+			});
+		}
+	};
+}).directive('autoOpenCreate', function () {
+	return {
+		restrict: 'A',
+		link: function link(scope, element, attrs) {
+			$(document).ready(function () {
+				setTimeout(function () {
+					$('.side-panel').css('width', openWidth);
+				}, openSpeed);
 			});
 		}
 	};
@@ -54,6 +83,25 @@ angular.module('upKeep').directive('closeCreate', function () {
 		restrict: 'EA',
 		link: function link(scope, element, attrs) {
 			scope.getUser();
+		}
+	};
+});
+'use strict';
+
+/**
+ * Created by Joshua Baert on 12/3/2016.
+ */
+
+angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams, mainSvc) {
+
+	mainSvc.getUser().then(function (res) {
+		$scope.user = res.data;
+		$scope.list = res.data.lists[$stateParams.index];
+	});
+
+	$scope.putList = function () {
+		if ($scope.list.name && $scope.list.icon) {
+			mainSvc.putList($stateParams.index, $scope.list.name, $scope.list.icon);
 		}
 	};
 });
@@ -72,12 +120,24 @@ angular.module('upKeep').controller('mainCtrl', function ($scope, mainSvc) {
  * Created by Joshua Baert on 12/2/2016.
  */
 
-angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stateParams) {
+angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stateParams, $state) {
+
+	$scope.newList = {
+		name: undefined,
+		icon: undefined
+	};
+
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			console.log('got user');
 			$scope.user = res.data;
 		});
+	};
+
+	$scope.postList = function () {
+		if ($scope.newList.name && $scope.newList.icon) {
+			mainSvc.postList($scope.newList.name, $scope.newList.icon);
+			$state.reload();
+		}
 	};
 
 	$scope.putUser = function () {
@@ -88,12 +148,6 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	$scope.index = $stateParams.index;
 
 	$scope.getUser();
-}).controller('listCtrl', function ($scope, $stateParams, mainSvc) {
-
-	mainSvc.getUser().then(function (res) {
-		$scope.user = res.data;
-		$scope.list = res.data.lists[$stateParams.index];
-	});
 });
 'use strict';
 
@@ -109,6 +163,16 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		});
 	};
 
+	this.postList = function (name, icon) {
+		var list = {
+			name: name,
+			icon: icon,
+			items: []
+		};
+
+		$http.post('/api/lists', list);
+	};
+
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
 		$http.put('/api/user', {
 			firstName: first,
@@ -117,6 +181,14 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 			phoneNumber: phone,
 			allowEmail: aEmail,
 			allowText: aText
+		});
+	};
+
+	this.putList = function (listIndex, name, icon) {
+		$http.put('/api/list', {
+			name: name,
+			icon: icon,
+			index: listIndex
 		});
 	};
 });

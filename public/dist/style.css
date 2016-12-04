@@ -406,8 +406,12 @@ template {
   upKeep for fun
   
 */
+@import url("https://fonts.googleapis.com/css?family=Reem+Kufi");
 body {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: "Reem Kufi", sans-serif; }
+  body a {
+    font-family: "Reem Kufi", sans-serif; }
   body a:visited {
     text-decoration: none;
     color: black; }
@@ -415,8 +419,11 @@ body {
     text-decoration: none;
     color: black; }
   body input {
-    text-align: center; }
+    text-align: center;
+    font-family: "Reem Kufi", sans-serif; }
   body h1 {
+    margin: 0; }
+  body h4 {
     margin: 0; }
   body h5 {
     margin: 0; }
@@ -640,17 +647,16 @@ body {
     top: 0;
     height: 100vh;
     width: 0;
-    border-left: solid #B2FFD6 2px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
     .user-view .side-panel .close {
       position: absolute;
-      top: 2vw;
-      left: 2vw;
-      height: 8vw;
-      width: 8vw;
+      top: 16px;
+      left: 4vw;
+      height: 10vw;
+      width: 10vw;
       background-color: #66C7F4;
-      border-radius: 4vw;
+      border-radius: 5vw;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -665,10 +671,30 @@ body {
       justify-content: center; }
       .user-view .side-panel .close .icon {
         font-size: 4vw; }
-    .user-view .side-panel .btns {
-      position: absolute;
-      bottom: 10px;
-      width: 100%; }
+  .user-view .btns {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+    .user-view .btns .btn {
+      width: 65px;
+      background-color: #66C7F4;
+      border-radius: 5px;
+      padding: 8px;
+      margin: 15px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center; }
 
 .home-main {
   min-height: 100vh;
@@ -710,6 +736,8 @@ body {
     -ms-flex-align: center;
     align-items: center; }
     .home-main .list-mini .list-mini-name {
+      background-color: #66C7F4;
+      border-radius: 5px;
       height: 100%;
       display: -webkit-box;
       display: -webkit-flex;
@@ -719,10 +747,10 @@ body {
       -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center;
-      -webkit-box-pack: start;
-      -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-      justify-content: flex-start;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
       width: 48vw; }
     .home-main .list-mini .list-mini-length {
       height: 100%;
@@ -799,14 +827,11 @@ body {
     -ms-flex-pack: distribute;
     justify-content: space-around; }
   .settings-main .set-titles {
+    margin-left: 5px;
     min-width: 85px; }
   .settings-main .set-input {
+    margin-right: 5px;
     width: 100%; }
-  .settings-main .btn {
-    background-color: #66C7F4;
-    border-radius: 5px;
-    padding: 8px;
-    margin: 15px; }
 
 .list-main {
   min-height: 100vh;
@@ -891,6 +916,51 @@ body {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between; }
+
+.side-panel-main {
+  width: 100%;
+  min-height: 99vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  overflow: hidden; }
+  .side-panel-main .input-wrapper {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #B2FFD6;
+    border-radius: 10px;
+    margin: 7px 2px;
+    min-height: 50px;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+  .side-panel-main .edit-input {
+    width: auto; }
 
 .hide {
   display: none;
