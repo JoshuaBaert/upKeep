@@ -35,6 +35,13 @@ angular.module('upKeep', ['ui.router'])
 				url: '',
 				templateUrl: './views/list.html'
 			})
-				.state('user.list.new');
+				.state('user.list.new', {
+					url: 'list/:index',
+					templateUrl: './views/side/newItem.html'
+				})
+				.state('user.list.edit', {
+					url: 'list/edit/:itemIndex',
+					templateUrl: './views/side/editItem.html'
+				});
 		$urlRouterProvider.otherwise('/');
 	});

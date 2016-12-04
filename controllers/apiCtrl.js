@@ -63,7 +63,6 @@ var testUser = {
 
 
 
-
 module.exports = {
 	readUser: function (req, res, next) {
 		res.json(testUser)

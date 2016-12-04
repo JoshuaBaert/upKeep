@@ -9,30 +9,24 @@
 			<h1>{{list.name}}</h1>
 		</div>
 		
-		<div class="item-wrapper" ng-repeat="reminder in list.items | orderBy : date: false">
+		<div class="item-wrapper" ng-repeat="item in list.items track by $index">
 			
 			<div class="item-row">
-				<h5>{{reminder.name}}</h5>
-				<h5>{{reminder.date}}</h5>
+				<h5>{{item.name}}</h5>
+				<h5>{{item.date}}</h5>
 			</div>
 			
 			<div class="item-row">
-				<div class="description"><h5>{{reminder.description}}</h5></div>
-				<div class="edit-btn" open-create><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></div>
+				<div class="description"><h5>{{item.description}}</h5></div>
+				<div class="edit-btn" ui-sref="user.list.edit({itemIndex: $index})" ui-sref-opts="{reload: true}" open-create>
+					<i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+				</div>
 			</div>
 			
 		
 		</div>
 	</div>
 	
-	<div class="side-panel">
-		<div class="close" close-create>
-			<i class="fa fa-times icon" aria-hidden="true"></i>
-		</div>
-		
-		<div class="btns">
-		
-		</div>
-	</div>
+	<ui-view class="side-panel"></ui-view>
 
 </div>
