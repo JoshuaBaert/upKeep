@@ -1,17 +1,24 @@
 <div class="user-view" ng-controller="userCtrl">
 	<div class="nav-main" close-create>
-		<a ui-sref="user.settings">
-			<div class="user-setting btn"><i class="fa fa-cog icon" aria-hidden="true"></i></div>
-		</a>
-		<a ui-sref="user.home">
-			<div class="mini-Logo btn"><i class="fa fa-user-circle icon" aria-hidden="true"></i></div>
-		</a>
-		<a ng-repeat="list in user.lists track by $index" ui-sref="user.list.new({index: $index})" ui-sref-opts="{reload: true}">
-		<div class="list-logo btn" ><i class="fa {{list.icon}} icon" aria-hidden="true"></i></div>
-		</a>
+		
+		<div class="nav-lists">
+			<a ui-sref="user.home">
+				<div class="mini-Logo btn"><i class="fa fa-user-circle icon" aria-hidden="true"></i></div>
+			</a>
+			<a ng-repeat="list in user.lists track by $index" ui-sref="user.list.new({listIndex: $index})" ui-sref-opts="{reload: true}">
+				<div class="list-logo btn"><i class="fa {{list.icon}} icon" aria-hidden="true"></i></div>
+			</a>
+		</div>
+		
+		<div>
+			<a ui-sref="user.settings">
+				<div class="user-setting btn"><i class="fa fa-cog icon" aria-hidden="true"></i></div>
+			</a>
+		</div>
+	
 	</div>
 	
 	<ui-view></ui-view>
-	
-	
+
+
 </div>

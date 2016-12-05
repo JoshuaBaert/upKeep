@@ -56,4 +56,13 @@ angular.module('upKeep')
 				scope.getUser();
 			}
 		}
+	})
+	.directive('datePicker', function () {
+		$('.date-picker').datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
 	});
+
+
+

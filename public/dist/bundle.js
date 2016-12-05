@@ -22,17 +22,17 @@ angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRou
 		url: "home",
 		templateUrl: './views/side/newList.html'
 	}).state('user.home.edit', {
-		url: 'home/edit/:index',
+		url: 'home/edit/:listIndex',
 		templateUrl: './views/side/editList.html',
 		reload: true
 	}).state('user.list', {
 		url: '',
 		templateUrl: './views/list.html'
 	}).state('user.list.new', {
-		url: 'list/:index',
+		url: 'list/:listIndex',
 		templateUrl: './views/side/newItem.html'
 	}).state('user.list.edit', {
-		url: 'list/edit/:itemIndex',
+		url: 'list/:listIndex/:itemIndex',
 		templateUrl: './views/side/editItem.html'
 	});
 	$urlRouterProvider.otherwise('/');
@@ -91,6 +91,11 @@ angular.module('upKeep').directive('getUser', function () {
 			scope.getUser();
 		}
 	};
+}).directive('datePicker', function () {
+	$('.date-picker').datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
 });
 'use strict';
 
@@ -98,18 +103,41 @@ angular.module('upKeep').directive('getUser', function () {
  * Created by Joshua Baert on 12/3/2016.
  */
 
-angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams, mainSvc) {
+angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams, $state, mainSvc) {
 
-	mainSvc.getUser().then(function (res) {
-		$scope.user = res.data;
-		$scope.list = res.data.lists[$stateParams.index];
-	});
+	$scope.newItem = {
+		name: undefined,
+		date: undefined,
+		description: undefined
+	};
+
+	$scope.getUser = function () {
+		mainSvc.getUser().then(function (res) {
+			console.log('got user', res.data);
+			$scope.user = res.data;
+			$scope.list = res.data.lists[$stateParams.listIndex];
+			if ($stateParams.itemIndex) {
+				$scope.editItem = res.data.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
+			}
+		});
+	};
+
+	$scope.postItem = function () {
+		if ($scope.newItem.name && $scope.newItem.date && $scope.newItem.description) {
+			mainSvc.postItem($scope.listIndex, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
+			$state.reload();
+		}
+	};
 
 	$scope.putList = function () {
 		if ($scope.list.name && $scope.list.icon) {
-			mainSvc.putList($stateParams.index, $scope.list.name, $scope.list.icon);
+			mainSvc.putList($stateParams.listIndex, $scope.list.name, $scope.list.icon);
 		}
 	};
+
+	$scope.getUser();
+
+	$scope.listIndex = $stateParams.listIndex;
 });
 'use strict';
 
@@ -151,7 +179,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 		mainSvc.putUser($scope.user.firstName, $scope.user.lastName, $scope.user.email, $scope.user.phoneNumber, $scope.user.allowEmail, $scope.user.allowText);
 	};
 
-	$scope.index = $stateParams.index;
+	$scope.index = $stateParams.listIndex;
 
 	$scope.getUser();
 });
@@ -177,6 +205,15 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		};
 
 		$http.post('/api/lists', list);
+	};
+
+	this.postItem = function (listIndex, name, date, description) {
+		$http.post('/api/item', {
+			listIndex: listIndex,
+			name: name,
+			date: date,
+			description: description
+		});
 	};
 
 	this.putUser = function (first, last, email, phone, aEmail, aText) {

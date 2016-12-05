@@ -20,13 +20,13 @@ var testUser = {
 					id: 1,
 					name: 'Heater air filter',
 					description: 'Change the air filter',
-					date: '2017/10/01',
+					date: new Date(Date.UTC(2017, 2, 14)),
 				},
 				{
 					id: 2,
 					name: 'seed lawn',
 					description: 'seed lawn',
-					date: '2017/06/01',
+					date: new Date(Date.UTC(2017, 6, 1)),
 				},
 			]
 			
@@ -40,7 +40,7 @@ var testUser = {
 					id: 3,
 					name: 'Fuel Filter',
 					description: 'Change the fuel filter',
-					date: '2017/10/01',
+					date: new Date(Date.UTC(2017, 10, 1)),
 				},
 				{
 					id: 4,
@@ -71,6 +71,18 @@ module.exports = {
 	createList: function (req, res, next) {
 		console.log(req.body);
 		testUser.lists.push(req.body);
+		res.sendStatus(200);
+	},
+	
+	createItem: function (req, res, next) {
+		var body = req.body;
+		var item = {
+			name: body.name,
+			date: body.date,
+			description: body.description
+		};
+		console.log(body);
+		testUser.lists[body.listIndex].items.push(item);
 		res.sendStatus(200);
 	},
 	

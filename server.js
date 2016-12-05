@@ -58,6 +58,7 @@ app.get('/api/user', apiCtrl.readUser);
 
 
 app.post('/api/lists', apiCtrl.createList);
+app.post('/api/item', apiCtrl.createItem);
 
 
 app.put('/api/user', apiCtrl.updateUser);

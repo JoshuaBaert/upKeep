@@ -20,6 +20,15 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		$http.post('/api/lists', list);
 	};
 	
+	this.postItem = function (listIndex, name, date, description) {
+		$http.post('/api/item', {
+			listIndex: listIndex,
+			name: name,
+			date: date,
+			description: description
+		})
+	};
+	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
 		$http.put('/api/user',
 			{

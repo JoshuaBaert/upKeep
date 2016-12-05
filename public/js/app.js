@@ -27,7 +27,7 @@ angular.module('upKeep', ['ui.router'])
 					templateUrl: './views/side/newList.html'
 				})
 				.state('user.home.edit', {
-					url: 'home/edit/:index',
+					url: 'home/edit/:listIndex',
 					templateUrl: './views/side/editList.html',
 					reload: true
 				})
@@ -36,11 +36,11 @@ angular.module('upKeep', ['ui.router'])
 				templateUrl: './views/list.html'
 			})
 				.state('user.list.new', {
-					url: 'list/:index',
+					url: 'list/:listIndex',
 					templateUrl: './views/side/newItem.html'
 				})
 				.state('user.list.edit', {
-					url: 'list/edit/:itemIndex',
+					url: 'list/:listIndex/:itemIndex',
 					templateUrl: './views/side/editItem.html'
 				});
 		$urlRouterProvider.otherwise('/');

@@ -36,7 +36,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	
 	
 	
-	$scope.index = $stateParams.index;
+	$scope.index = $stateParams.listIndex;
 	
 	$scope.getUser();
 	
