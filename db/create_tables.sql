@@ -20,7 +20,9 @@ CREATE TABLE items (
   id SERIAL primary key,
   listid integer references lists(id),
   item_name varchar(255),
-  date varchar(255),
+  date_year varchar(255),
+  date_month varchar(255),
+  date_day varchar(255),
   description text
 );
 

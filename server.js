@@ -58,10 +58,10 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 app.get('/auth/google/callback', function (req, res, next) {
 	next();
 }, passport.authenticate('google', {
-	successRedirect: 'http://localhost:8080/#/',
+	successRedirect: 'http://localhost:3030/#/',
 	failureRedirect: '/login'
 }), function (req, res) {
-	res.redirect('http://localhost:8080/#/');
+	res.redirect('http://localhost:3030/#/');
 });
 
 

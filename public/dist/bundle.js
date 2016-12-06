@@ -113,11 +113,11 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			$scope.user = res.data;
-			$scope.list = res.data.lists[$stateParams.listIndex];
+			$scope.user = res;
+			$scope.list = res.lists[$stateParams.listIndex];
 			if ($stateParams.itemIndex) {
-				$scope.editItem = res.data.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
-				$scope.editItem.date = new Date(2017, 1, 1);
+				$scope.editItem = res.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
+				$scope.editItem.date = new Date($scope.editItem.date);
 			}
 		});
 	};
@@ -178,7 +178,8 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			$scope.user = res.data;
+
+			$scope.user = res;
 		});
 	};
 
@@ -208,7 +209,9 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 
 	this.getUser = function () {
 		return $http.get('/api/user').then(function (res) {
-			return res;
+			var user = res.data;
+			console.log('mainSvc', user);
+			return user;
 		});
 	};
 

@@ -20,13 +20,13 @@ var testUser = {
 					id: 1,
 					name: 'Heater air filter',
 					description: 'Change the air filter',
-					date: new Date("February 2, 2017"),
+					date: 1484550000000
 				},
 				{
 					id: 2,
 					name: 'seed lawn',
 					description: 'seed lawn',
-					date: new Date(Date(2017, 6, 1)),
+					date: 1498802400000
 				},
 			]
 			
@@ -40,19 +40,19 @@ var testUser = {
 					id: 3,
 					name: 'Fuel Filter',
 					description: 'Change the fuel filter',
-					date: new Date(Date.UTC(2017, 10, 1)),
+					date: 1484550000000
 				},
 				{
 					id: 4,
 					name: 'Tires',
 					description: 'Get new tires',
-					date: '2017/06/01',
+					date: 1484550000000
 				},
 				{
 					id: 5,
 					name: 'Wiper blades',
 					description: 'Change the wiper blades for winter',
-					date: '2017/10/01',
+					date: 1484550000000
 				},
 			]
 			

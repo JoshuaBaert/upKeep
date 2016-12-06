@@ -11,7 +11,8 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			$scope.user = res.data;
+			
+			$scope.user = res;
 		});
 	};
 	

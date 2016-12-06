@@ -13,11 +13,11 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			$scope.user = res.data;
-			$scope.list = res.data.lists[$stateParams.listIndex];
+			$scope.user = res;
+			$scope.list = res.lists[$stateParams.listIndex];
 			if ($stateParams.itemIndex) {
-				$scope.editItem = res.data.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
-				$scope.editItem.date = new Date(2017, 1, 1);
+				$scope.editItem = res.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
+				$scope.editItem.date = new Date($scope.editItem.date);
 			}
 		});
 	};

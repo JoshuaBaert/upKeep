@@ -1,4 +1,4 @@
-<div class="list-main" ng-controller="listsCtrl">
+<div class="list-main" ng-controller="listsCtrl" >
 	
 	<div class="create" ui-sref="user.list.new({listIndex: listIndex})" open-create>
 		<i class="fa fa-plus icon" aria-hidden="true"></i>
@@ -13,7 +13,7 @@
 			
 			<div class="item-row">
 				<h5>{{item.name}}</h5>
-				<h5>{{item.date}}</h5>
+				<h5>{{item.date | date : "MM/dd/y"}}</h5>
 			</div>
 			
 			<div class="item-row">
