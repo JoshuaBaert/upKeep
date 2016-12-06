@@ -35,9 +35,9 @@ passport.deserializeUser(function (obj, cb) {
 
 var app = module.exports = express();
 
-app.set('db', massive.connectSync({
-	connectionString: 'postgres://postgres:test123@localhost/test',
-}));
+//app.set('db', massive.connectSync({
+//	connectionString: 'postgres://postgres:test123@localhost/test',
+//}));
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
