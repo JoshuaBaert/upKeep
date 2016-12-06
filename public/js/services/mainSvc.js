@@ -10,11 +10,12 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		})
 	};
 	
+	
 	this.postList = function (name, icon) {
 		var list = {
 			name: name,
 			icon: icon,
-			items: []
+			items: [],
 		};
 		
 		$http.post('/api/lists', list);
@@ -25,9 +26,10 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 			listIndex: listIndex,
 			name: name,
 			date: date,
-			description: description
+			description: description,
 		})
 	};
+	
 	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
 		$http.put('/api/user',
@@ -37,7 +39,7 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 				email: email,
 				phoneNumber: phone,
 				allowEmail: aEmail,
-				allowText: aText
+				allowText: aText,
 			});
 	};
 	
@@ -45,9 +47,18 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		$http.put('/api/list', {
 			name: name,
 			icon: icon,
-			index: listIndex
+			index: listIndex,
 		})
-	}
+	};
 	
+	
+	this.deleteList = function (listIndex) {
+		$http.delete('/api/' + listIndex);
+	};
+	
+	this.deleteItem = function (listIndex, itemIndex) {
+		$http.delete('/api/' + listIndex + '/' + itemIndex);
+		console.log('Svc deleting while sending ', listIndex, itemIndex);
+	}
 	
 });

@@ -74,6 +74,10 @@ app.put('/api/user', apiCtrl.updateUser);
 app.put('/api/list', apiCtrl.updateList);
 
 
+app.delete('/api/:list', apiCtrl.deleteList);
+app.delete('/api/:list/:item', apiCtrl.deleteItem);
+
+
 
 app.listen(config.port, function () {
 	console.log('listening on ' + config.port)

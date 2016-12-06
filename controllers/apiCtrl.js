@@ -69,6 +69,7 @@ module.exports = {
 		res.json(testUser)
 	},
 	
+	
 	createList: function (req, res, next) {
 		console.log(req.body);
 		testUser.lists.push(req.body);
@@ -87,6 +88,7 @@ module.exports = {
 		res.sendStatus(200);
 	},
 	
+	
 	updateUser: function (req, res, next) {
 		console.log(req.body);
 		var body = req.body;
@@ -99,13 +101,28 @@ module.exports = {
 		
 		res.sendStatus(200);
 	},
+	
 	updateList: function (req, res, next) {
 		var body = req.body;
 		testUser.lists[body.index].name = body.name;
 		testUser.lists[body.index].icon = body.icon;
 		res.sendStatus(200);
-	}
+	},
 	
+	
+	deleteList: function (req, res, next) {
+		var index = req.params.list;
+		console.log('hit API with ', req.params);
+		testUser.lists.splice(index,1);
+		res.sendStatus(200);
+	},
+	
+	deleteItem: function (req, res, next) {
+		var index = req.params;
+		console.log('hit API with ', req.params);
+		testUser.lists[index.list].items.splice(index.item, 1);
+		res.sendStatus(200);
+	}
 	
 	
 };
