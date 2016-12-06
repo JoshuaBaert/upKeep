@@ -50,10 +50,19 @@ app.use(passport.session());
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
-app.get('/auth/google/callback', function (req, res, next) {next();}, passport.authenticate('google', {successRedirect: 'http://localhost:8080/#/', failureRedirect: '/login'}), function (req, res) {res.redirect('http://localhost:8080/#/');});
+app.get('/auth/google/callback', function (req, res, next) {
+	next();
+}, passport.authenticate('google', {
+	successRedirect: 'http://localhost:8080/#/',
+	failureRedirect: '/login'
+}), function (req, res) {
+	res.redirect('http://localhost:8080/#/');
+});
 
 
-
+app.get('/', function (req, res) {
+	res.sendFile(__dirname + '/index.html');
+});
 app.get('/api/user', apiCtrl.readUser);
 
 

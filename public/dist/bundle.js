@@ -113,11 +113,12 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 
 	$scope.getUser = function () {
 		mainSvc.getUser().then(function (res) {
-			console.log('got user', res.data);
 			$scope.user = res.data;
 			$scope.list = res.data.lists[$stateParams.listIndex];
 			if ($stateParams.itemIndex) {
 				$scope.editItem = res.data.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
+				$scope.editItem.date = new Date(2017, 1, 1);
+				console.log($scope.editItem);
 			}
 		});
 	};
@@ -133,6 +134,10 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 		if ($scope.list.name && $scope.list.icon) {
 			mainSvc.putList($stateParams.listIndex, $scope.list.name, $scope.list.icon);
 		}
+	};
+
+	$scope.deleteList = function () {
+		mainSvc.deleteList($stateParams.listIndex);
 	};
 
 	$scope.getUser();

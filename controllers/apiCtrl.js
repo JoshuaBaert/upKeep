@@ -20,13 +20,13 @@ var testUser = {
 					id: 1,
 					name: 'Heater air filter',
 					description: 'Change the air filter',
-					date: new Date(Date.UTC(2017, 2, 14)),
+					date: new Date("February 2, 2017"),
 				},
 				{
 					id: 2,
 					name: 'seed lawn',
 					description: 'seed lawn',
-					date: new Date(Date.UTC(2017, 6, 1)),
+					date: new Date(Date(2017, 6, 1)),
 				},
 			]
 			
@@ -60,6 +60,7 @@ var testUser = {
 		
 	]
 };
+
 
 
 
