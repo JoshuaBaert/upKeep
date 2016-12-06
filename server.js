@@ -14,6 +14,8 @@ const apiCtrl = require('./controllers/apiCtrl');
 
 const config = require('./config');
 
+
+
 passport.use(new GoogleStrategy({
 		clientID: config.googleClientId,
 		clientSecret: config.googleClientSecret,
@@ -33,11 +35,14 @@ passport.deserializeUser(function (obj, cb) {
 	cb(null, obj);
 });
 
+
+
 var app = module.exports = express();
 
 //app.set('db', massive.connectSync({
 //	connectionString: 'postgres://postgres:test123@localhost/test',
 //}));
+
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -60,9 +65,7 @@ app.get('/auth/google/callback', function (req, res, next) {
 });
 
 
-app.get('/', function (req, res) {
-	res.sendFile(__dirname + '/index.html');
-});
+
 app.get('/api/user', apiCtrl.readUser);
 
 
@@ -72,6 +75,7 @@ app.post('/api/item', apiCtrl.createItem);
 
 app.put('/api/user', apiCtrl.updateUser);
 app.put('/api/list', apiCtrl.updateList);
+app.put('/api/item', apiCtrl.updateItem);
 
 
 app.delete('/api/:list', apiCtrl.deleteList);

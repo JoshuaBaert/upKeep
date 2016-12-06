@@ -22,6 +22,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 		});
 	};
 	
+	
 	$scope.postItem = function () {
 		if ($scope.newItem.name && $scope.newItem.date && $scope.newItem.description) {
 			mainSvc.postItem($scope.listIndex, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
@@ -29,11 +30,19 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 		}
 	};
 	
+	
 	$scope.putList = function () {
 		if ($scope.list.name && $scope.list.icon) {
 			mainSvc.putList($stateParams.listIndex, $scope.list.name, $scope.list.icon);
 		}
 	};
+	
+	$scope.putItem = function () {
+		if ($scope.editItem.name && $scope.editItem.date && $scope.editItem.description) {
+			mainSvc.putItem($stateParams.listIndex, $stateParams.itemIndex, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
+		}
+	};
+	
 	
 	$scope.deleteList =function () {
 		mainSvc.deleteList($stateParams.listIndex)

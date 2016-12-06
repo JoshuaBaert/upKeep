@@ -109,6 +109,13 @@ module.exports = {
 		res.sendStatus(200);
 	},
 	
+	updateItem: function (req, res, next) {
+		var body = req.body;
+		console.log(req.body);
+		testUser.lists[body.listIndex].items.splice(body.itemIndex, 1, body.item);
+		res.sendStatus(200);
+	},
+	
 	
 	deleteList: function (req, res, next) {
 		var index = req.params.list;
@@ -119,7 +126,6 @@ module.exports = {
 	
 	deleteItem: function (req, res, next) {
 		var index = req.params;
-		console.log('hit API with ', req.params);
 		testUser.lists[index.list].items.splice(index.item, 1);
 		res.sendStatus(200);
 	}

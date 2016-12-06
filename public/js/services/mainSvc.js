@@ -31,6 +31,7 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 	};
 	
 	
+	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
 		$http.put('/api/user',
 			{
@@ -51,6 +52,19 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		})
 	};
 	
+	this.putItem = function (listIndex, itemIndex, name, date, description) {
+		var item = {
+			name: name,
+			date: date,
+			description: description,
+		};
+		$http.put('/api/item', {
+			listIndex: listIndex,
+			itemIndex: itemIndex,
+			item: item
+		})
+	};
+	
 	
 	this.deleteList = function (listIndex) {
 		$http.delete('/api/' + listIndex);
@@ -58,7 +72,6 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 	
 	this.deleteItem = function (listIndex, itemIndex) {
 		$http.delete('/api/' + listIndex + '/' + itemIndex);
-		console.log('Svc deleting while sending ', listIndex, itemIndex);
 	}
 	
 });

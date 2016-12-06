@@ -135,6 +135,12 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 		}
 	};
 
+	$scope.putItem = function () {
+		if ($scope.editItem.name && $scope.editItem.date && $scope.editItem.description) {
+			mainSvc.putItem($stateParams.listIndex, $stateParams.itemIndex, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
+		}
+	};
+
 	$scope.deleteList = function () {
 		mainSvc.deleteList($stateParams.listIndex);
 	};
@@ -244,13 +250,25 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 		});
 	};
 
+	this.putItem = function (listIndex, itemIndex, name, date, description) {
+		var item = {
+			name: name,
+			date: date,
+			description: description
+		};
+		$http.put('/api/item', {
+			listIndex: listIndex,
+			itemIndex: itemIndex,
+			item: item
+		});
+	};
+
 	this.deleteList = function (listIndex) {
 		$http.delete('/api/' + listIndex);
 	};
 
 	this.deleteItem = function (listIndex, itemIndex) {
 		$http.delete('/api/' + listIndex + '/' + itemIndex);
-		console.log('Svc deleting while sending ', listIndex, itemIndex);
 	};
 });
 //# sourceMappingURL=maps/bundle.js.map
