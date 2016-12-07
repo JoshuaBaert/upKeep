@@ -43,5 +43,5 @@ angular.module('upKeep', ['ui.router'])
 					url: 'list/:listIndex/:itemIndex',
 					templateUrl: './views/side/editItem.html'
 				});
-		$urlRouterProvider.otherwise('/');
+		$urlRouterProvider.otherwise('/login');
 	});

@@ -48,6 +48,7 @@ passport.deserializeUser((user, done) => {
 
 const app = module.exports = express();
 
+
 let db = massive.connect({
 		connectionString: 'postgres://postgres:test123@localhost/test'
 	},
@@ -63,6 +64,8 @@ app.set('db', massive.connectSync({
 const apiCtrl = require('./controllers/apiCtrl');
 
 
+app.use(apiCtrl.checkHits);
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
@@ -74,9 +77,7 @@ app.use(passport.session());
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
-app.get('/auth/google/callback', (req, res, next) => {
-	next();
-}, passport.authenticate('google', {
+app.get('/auth/google/callback', passport.authenticate('google', {
 	successRedirect: 'http://localhost:3030/#/',
 	failureRedirect: '/login'
 }), (req, res) => {
@@ -84,6 +85,8 @@ app.get('/auth/google/callback', (req, res, next) => {
 	res.redirect('http://localhost:3030/#/');
 });
 
+
+app.use(apiCtrl.checkAuth);
 
 
 app.get('/api/user', apiCtrl.readUser);

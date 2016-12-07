@@ -14,18 +14,41 @@ db.createTables((err, data) => {
 });
 
 module.exports = {
-	readUser:(req, res, next) => {
+	
+	checkHits: (req, res, next) => {
+//		console.log(req.originalUrl);
+		next();
+		
+	},
+	
+	checkAuth: (req, res, next) => {
+		
+		if (req.isAuthenticated()) {
+			next();
+		} else {
+			res.redirect('/');
+		}
+		
+		
+	},
+	
+	
+	readUser: (req, res, next) => {
+		
 		res.json(req.user);
+		
 	},
 	
 	readLists: (req, res, next) => {
-		db.readLists([req.user.id],(err, dbRes)=>{
+		db.readLists([req.user.id], (err, dbRes) => {
+			if (err) console.log(err);
 			res.json(dbRes);
 		})
 	},
 	
 	readItems: (req, res, next) => {
-		db.readItems([req.user.id],(err, dbRes)=>{
+		db.readItems([req.user.id], (err, dbRes) => {
+			if (err) console.log(err);
 			res.json(dbRes);
 		})
 	},
@@ -82,7 +105,7 @@ module.exports = {
 	deleteList: (req, res, next) => {
 		let index = req.params.list;
 		console.log('hit API with ', req.params);
-		testUser.lists.splice(index,1);
+		testUser.lists.splice(index, 1);
 		res.sendStatus(200);
 	},
 	

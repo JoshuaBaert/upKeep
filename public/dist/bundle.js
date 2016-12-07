@@ -35,7 +35,7 @@ angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRou
 		url: 'list/:listIndex/:itemIndex',
 		templateUrl: './views/side/editItem.html'
 	});
-	$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/login');
 });
 'use strict';
 
@@ -112,12 +112,16 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	};
 
 	$scope.getUser = function () {
-		$scope.user = mainSvc.getUser();
-		$scope.list = $scope.user.lists[$stateParams.listIndex];
-		if ($stateParams.itemIndex) {
-			$scope.list = $scope.user.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
-			//			$scope.editItem.date = new Date($scope.editItem.date);
-		}
+
+		mainSvc.getUser().then(function (res) {
+			$scope.user = res;
+
+			$scope.list = $scope.user.lists[$stateParams.listIndex];
+			if ($stateParams.itemIndex) {
+				$scope.editItem = $scope.user.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
+				$scope.editItem.date = new Date($scope.editItem.date);
+			}
+		});
 	};
 
 	$scope.postItem = function () {
@@ -175,8 +179,11 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	};
 
 	$scope.getUser = function () {
-		console.log(mainSvc.getUser());
-		$scope.user = mainSvc.getUser();
+
+		mainSvc.getUser().then(function (res) {
+			$scope.user = res;
+			console.log($scope.user);
+		});
 	};
 
 	$scope.postList = function () {
@@ -205,7 +212,7 @@ var user = {
 	changed: true
 };
 
-angular.module('upKeep').service('mainSvc', function ($http, $q) {
+angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
 	function getUser() {
 
@@ -258,9 +265,14 @@ angular.module('upKeep').service('mainSvc', function ($http, $q) {
 		}
 
 		$http.get('/api/user').then(function (res) {
-			ur = res.data;
-			gotUser = true;
-			giveUser(ur, ls, it);
+			if (typeof res.data === 'string') {
+				console.log('err thrown redirecting');
+				$state.go('login');
+			} else {
+				ur = res.data;
+				gotUser = true;
+				giveUser(ur, ls, it);
+			}
 		});
 		$http.get('/api/lists').then(function (res) {
 			ls = res.data;
@@ -277,14 +289,18 @@ angular.module('upKeep').service('mainSvc', function ($http, $q) {
 
 	this.getUser = function () {
 
+		var defer = $q.defer();
+
 		if (user.changed) {
-			user.changed = false;
+			//			user.changed = false;
 			getUser().then(function (res) {
-				return res;
+				defer.resolve(res);
 			});
 		} else {
-			return user;
+			defer.resolve(user);
 		}
+
+		return defer.promise;
 	};
 
 	this.postList = function (name, icon) {

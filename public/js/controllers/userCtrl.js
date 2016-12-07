@@ -10,8 +10,11 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	};
 	
 	$scope.getUser = function () {
-		console.log(mainSvc.getUser());
-		$scope.user = mainSvc.getUser()
+		
+		mainSvc.getUser().then((res) => {
+			$scope.user = res;
+			console.log($scope.user);
+		});
 		
 	};
 	

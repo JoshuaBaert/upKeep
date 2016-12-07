@@ -7,8 +7,8 @@ var user = {
 };
 
 
-
-angular.module('upKeep').service('mainSvc', function ($http, $q) {
+angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
+	
 	
 	function getUser () {
 		
@@ -62,9 +62,15 @@ angular.module('upKeep').service('mainSvc', function ($http, $q) {
 		}
 		
 		$http.get('/api/user').then((res)=>{
-			ur = res.data;
-			gotUser = true;
-			giveUser(ur, ls, it);
+			if (typeof res.data === 'string') {
+				console.log('err thrown redirecting');
+				$state.go('login');
+			} else {
+				ur = res.data;
+				gotUser = true;
+				giveUser(ur, ls, it);
+			}
+			
 		});
 		$http.get('/api/lists').then((res)=>{
 			ls = res.data;
@@ -79,17 +85,21 @@ angular.module('upKeep').service('mainSvc', function ($http, $q) {
 		return defer.promise
 	}
 	
+	
 	this.getUser = function () {
 		
+		var defer = $q.defer();
+		
 		if (user.changed) {
-			user.changed = false;
+//			user.changed = false;
 			getUser().then(function (res) {
-				return res
+				defer.resolve(res);
 			});
 		} else {
-			return user
+			defer.resolve(user);
 		}
 		
+		return defer.promise
 	};
 	
 	
