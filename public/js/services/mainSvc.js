@@ -12,6 +12,8 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	function getUser () {
 		
+		console.log('Getting user.');
+		
 		let gotUser = false;
 		let gotLists = false;
 		let gotItems = false;
@@ -25,7 +27,6 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		function giveUser (ur, ls, it) {
 			
 			if (gotItems && gotLists && gotUser) {
-				console.log(ur);
 				
 				user.id = ur.id;
 				user.firstName = ur.first_name;
@@ -44,7 +45,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 							items.push({
 								id: ele.id,
 								name: ele.item_name,
-								date: ele.date,
+								date: parseInt(ele.date),
 								description: ele.description,
 							})
 						}
@@ -93,7 +94,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		var defer = $q.defer();
 		
 		if (user.changed) {
-//			user.changed = false;
+			user.changed = false;
 			getUser().then(function (res) {
 				defer.resolve(res);
 			});
@@ -106,6 +107,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	
 	this.postList = function (name, icon) {
+		user.changed = true;
 		var list = {
 			userId: user.id,
 			name: name,
@@ -116,6 +118,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	};
 	
 	this.postItem = function (listId, name, date, description) {
+		user.changed = true;
 		console.log(listId);
 		$http.post('/api/item', {
 			userId: user.id,
@@ -130,6 +133,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
 		user.changed = true;
+		user.changed = true;
 		$http.put('/api/user',
 			{
 				userId: user.id,
@@ -143,6 +147,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	};
 	
 	this.putList = function (listId, name, icon) {
+		user.changed = true;
 		$http.put('/api/list', {
 			listId: listId,
 			name: name,
@@ -151,6 +156,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	};
 	
 	this.putItem = function (itemId, name, date, description) {
+		user.changed = true;
 		$http.put('/api/item', {
 			itemId: itemId,
 			name: name,
@@ -161,10 +167,12 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	
 	this.deleteList = function (listId) {
+		user.changed = true;
 		$http.delete('/api/list/' + listId);
 	};
 	
 	this.deleteItem = function (itemId) {
+		user.changed = true;
 		console.log('hit Svc with ' + itemId);
 		$http.delete('/api/item/' + itemId);
 	}

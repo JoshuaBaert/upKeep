@@ -87,7 +87,6 @@ module.exports = {
 	
 	
 	updateUser: (req, res, next) => {
-		console.log(req.body);
 		let body = req.body;
 		
 		db.updateUser([
@@ -156,7 +155,6 @@ module.exports = {
 	
 	deleteItem: (req, res, next) => {
 		let index = req.params.itemId;
-		console.log(index);
 		db.deleteItem([index], (err, dbRes)=>{
 			if(err) {
 				console.log(err);

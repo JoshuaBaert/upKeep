@@ -19,7 +19,9 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 			$scope.list = $scope.user.lists[$stateParams.listIndex];
 			if ($stateParams.itemIndex) {
 				$scope.editItem = $scope.user.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
-			$scope.editItem.date = new Date($scope.editItem.date);
+				
+				$scope.editItem.date = new Date($scope.editItem.date);
+				
 			}
 			
 		});
