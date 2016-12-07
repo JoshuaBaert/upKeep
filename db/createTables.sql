@@ -30,7 +30,7 @@ CREATE TABLE items (
 
 INSERT INTO users (first_name, last_name, email, phone, allow_emails, allow_texts, google_id, facebook_id)
 VALUES ('Joshua', 'Baert', 'jbghoring@gmail.com', '801-850-8199', true, true, '102527176643404312384', null),
-('Kiery', 'Baert', 'kieryclayton@gmail.com', '385-329-4464', true, true, '102203758604518966743', null);
+('Kiery', 'Baert', 'kieryclayton@gmail.com', '385-329-4464', true, true, null, null);
 
 INSERT INTO lists (list_name,icon, user_id)
 VALUES ('Home', 'fa-home', 1),
