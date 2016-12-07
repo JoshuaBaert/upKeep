@@ -4,4 +4,4 @@
 
 var moment = require('moment');
 
-console.log(moment('2017-6-30', 'YYYY-MM-DD').valueOf());
+console.log(moment('2017-4-30', 'YYYY-MM-DD').valueOf());

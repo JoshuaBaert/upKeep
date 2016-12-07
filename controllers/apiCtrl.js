@@ -2,83 +2,80 @@
  * Created by Joshua Baert on 12/2/2016.
  */
 
-var testUser = {
-	id: 1,
-	firstName: 'Joshua',
-	lastName: 'Baert',
-	email: 'jbghoring@gmail.com',
-	phoneNumber: '801-850-8199',
-	allowEmail: true,
-	allowText: true,
-	lists: [
-		{
-			id: 1,
-			name: 'Home',
-			icon: 'fa-home',
-			items: [
-				{
-					id: 1,
-					name: 'Heater air filter',
-					description: 'Change the air filter',
-					date: 1484550000000
-				},
-				{
-					id: 2,
-					name: 'seed lawn',
-					description: 'seed lawn',
-					date: 1498802400000
-				},
-			]
-			
-		},
-		{
-			id: 2,
-			name: 'Civic',
-			icon: 'fa-car',
-			items: [
-				{
-					id: 3,
-					name: 'Fuel Filter',
-					description: 'Change the fuel filter',
-					date: 1484550000000
-				},
-				{
-					id: 4,
-					name: 'Tires',
-					description: 'Get new tires',
-					date: 1484550000000
-				},
-				{
-					id: 5,
-					name: 'Wiper blades',
-					description: 'Change the wiper blades for winter',
-					date: 1484550000000
-				},
-			]
-			
-		}
-		
-	]
-};
 
 
+const app = require('../server');
 
+const db = app.get('db');
+
+db.createTables((err, data) => {
+	if (err) console.log(err);
+	else console.log('All tables successfully reset');
+});
 
 module.exports = {
-	readUser: function (req, res, next) {
-		res.json(testUser)
+	readUser:(req, res, next) => {
+		let rUser = req.user;
+		var user = {
+			id: rUser.id,
+			firstName: rUser.first_name,
+			lastName: rUser.last_name,
+			email: rUser.email,
+			phoneNumber: rUser.phone,
+			allowEmail: rUser.allow_emails,
+			allowText: rUser.allow_texts,
+			lists: [],
+		};
+		
+		
+		
+		db.getLists([rUser.id], (err, listsRes) => {
+			if (err) console.log(err);
+			else {
+				listsRes.forEach((e, i)=>{
+					var list = {
+						id: e.id,
+						name: e.name,
+						icon: e.icon,
+						items: []
+					};
+					
+					db.getItems([e.id],(err, itemRes)=>{
+						if(err) console.log(err);
+						else {
+							itemRes.forEach((ele,ind) =>{
+								var item = {
+									id: ele.id,
+									name: ele.item_name,
+									date: ele.date,
+									description: ele.description,
+								};
+								list.items.push(item);
+							});
+							user.lists.push(list);
+							console.log(user);
+							res.json(user);
+						}
+					});
+					
+					
+					
+				});
+			}
+		});
 	},
 	
 	
-	createList: function (req, res, next) {
+	
+	createList: (req, res, next) => {
 		console.log(req.body);
 		testUser.lists.push(req.body);
 		res.sendStatus(200);
 	},
 	
-	createItem: function (req, res, next) {
-		var body = req.body;
-		var item = {
+	createItem: (req, res, next) => {
+		let body = req.body;
+		let item = {
 			name: body.name,
 			date: body.date,
 			description: body.description
@@ -89,9 +86,9 @@ module.exports = {
 	},
 	
 	
-	updateUser: function (req, res, next) {
+	updateUser: (req, res, next) => {
 		console.log(req.body);
-		var body = req.body;
+		let body = req.body;
 		testUser.firstName = body.firstName;
 		testUser.lastName = body.lastName;
 		testUser.email = body.email;
@@ -102,30 +99,30 @@ module.exports = {
 		res.sendStatus(200);
 	},
 	
-	updateList: function (req, res, next) {
-		var body = req.body;
+	updateList: (req, res, next) => {
+		let body = req.body;
 		testUser.lists[body.index].name = body.name;
 		testUser.lists[body.index].icon = body.icon;
 		res.sendStatus(200);
 	},
 	
-	updateItem: function (req, res, next) {
-		var body = req.body;
+	updateItem: (req, res, next) => {
+		let body = req.body;
 		console.log(req.body);
 		testUser.lists[body.listIndex].items.splice(body.itemIndex, 1, body.item);
 		res.sendStatus(200);
 	},
 	
 	
-	deleteList: function (req, res, next) {
-		var index = req.params.list;
+	deleteList: (req, res, next) => {
+		let index = req.params.list;
 		console.log('hit API with ', req.params);
 		testUser.lists.splice(index,1);
 		res.sendStatus(200);
 	},
 	
-	deleteItem: function (req, res, next) {
-		var index = req.params;
+	deleteItem: (req, res, next) => {
+		let index = req.params;
 		testUser.lists[index.list].items.splice(index.item, 1);
 		res.sendStatus(200);
 	}

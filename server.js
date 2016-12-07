@@ -10,10 +10,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const massive = require('massive');
 const cors = require('cors');
 
-const apiCtrl = require('./controllers/apiCtrl');
 
 const config = require('./config');
-
 
 
 passport.use(new GoogleStrategy({
@@ -21,27 +19,48 @@ passport.use(new GoogleStrategy({
 		clientSecret: config.googleClientSecret,
 		callbackURL: "http://localhost:" + config.port + "/auth/google/callback"
 	},
-	function (accessToken, refreshToken, profile, cb) {
-		return cb(null, profile);
+	(accessToken, refreshToken, profile, done) => {
+		
+		if (profile.provider === 'google') {
+			db.getUserInfo([profile.id], (err, userArr) => {
+				return done(null, userArr[0]);
+			});
+		} else if (profile.provider === 'facebook') {
+			
+		}
+		
+		return;
 	}
 ));
 
-// prep to put on session
-passport.serializeUser(function (user, cb) {
-	cb(null, user);
-});
-// gets data from session prep for req.user
-passport.deserializeUser(function (obj, cb) {
-	cb(null, obj);
+
+
+
+passport.serializeUser((user, done) => {
+	done(null, user);
 });
 
+passport.deserializeUser((user, done) => {
+	done(null, user);
+});
 
 
-var app = module.exports = express();
 
-//app.set('db', massive.connectSync({
-//	connectionString: 'postgres://postgres:test123@localhost/test',
-//}));
+const app = module.exports = express();
+
+let db = massive.connect({
+		connectionString: 'postgres://postgres:test123@localhost/test'
+	},
+	(err, localdb) => {
+		db = localdb;
+		app.set('db', db);
+	});
+
+app.set('db', massive.connectSync({
+	connectionString: 'postgres://postgres:test123@localhost/test',
+}));
+
+const apiCtrl = require('./controllers/apiCtrl');
 
 
 app.use(express.static('public'));
@@ -55,12 +74,13 @@ app.use(passport.session());
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
-app.get('/auth/google/callback', function (req, res, next) {
+app.get('/auth/google/callback', (req, res, next) => {
 	next();
 }, passport.authenticate('google', {
 	successRedirect: 'http://localhost:3030/#/',
 	failureRedirect: '/login'
-}), function (req, res) {
+}), (req, res) => {
+	console.log(req.user);
 	res.redirect('http://localhost:3030/#/');
 });
 
@@ -83,6 +103,6 @@ app.delete('/api/:list/:item', apiCtrl.deleteItem);
 
 
 
-app.listen(config.port, function () {
+app.listen(config.port, () => {
 	console.log('listening on ' + config.port)
 });
