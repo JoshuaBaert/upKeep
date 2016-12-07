@@ -22,7 +22,7 @@ passport.use(new GoogleStrategy({
 	(accessToken, refreshToken, profile, done) => {
 		
 		if (profile.provider === 'google') {
-			db.getUserInfo([profile.id], (err, userArr) => {
+			db.readUserInfo([profile.id], (err, userArr) => {
 				return done(null, userArr[0]);
 			});
 		} else if (profile.provider === 'facebook') {
@@ -87,6 +87,8 @@ app.get('/auth/google/callback', (req, res, next) => {
 
 
 app.get('/api/user', apiCtrl.readUser);
+app.get('/api/lists', apiCtrl.readLists);
+app.get('/api/items', apiCtrl.readItems);
 
 
 app.post('/api/lists', apiCtrl.createList);

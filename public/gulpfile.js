@@ -45,12 +45,12 @@ gulp.task('build-js', function () {
 			.pipe(print())
 			.pipe(babel({presets: ['es2015']}))
 			.pipe(concat('bundle.js'))
-			//			.pipe(uglify())
 			.pipe(sourcemaps.write('./maps'))
 			.pipe(gulp.dest('./dist'))
 			.pipe(livereload());
 });
 
+/*    */
 
 gulp.task('build', ['clean', 'build-css', 'build-js'], function () {
 	return gulp.src('index.html')

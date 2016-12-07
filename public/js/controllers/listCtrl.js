@@ -12,14 +12,12 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	};
 	
 	$scope.getUser = function () {
-		mainSvc.getUser().then(function (res) {
-			$scope.user = res;
-			$scope.list = res.lists[$stateParams.listIndex];
-			if ($stateParams.itemIndex) {
-				$scope.editItem = res.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
-				$scope.editItem.date = new Date($scope.editItem.date);
-			}
-		});
+		$scope.user = mainSvc.getUser();
+		$scope.list = $scope.user.lists[$stateParams.listIndex];
+		if ($stateParams.itemIndex) {
+			$scope.list = $scope.user.lists[$stateParams.listIndex].items[$stateParams.itemIndex];
+//			$scope.editItem.date = new Date($scope.editItem.date);
+		}
 	};
 	
 	
@@ -44,11 +42,11 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	};
 	
 	
-	$scope.deleteList =function () {
+	$scope.deleteList = function () {
 		mainSvc.deleteList($stateParams.listIndex)
 	};
 	
-	$scope.deleteItem =function () {
+	$scope.deleteItem = function () {
 //		console.log('Ctrl deleting sending ', $stateParams.listIndex, $stateParams.itemIndex);
 		mainSvc.deleteItem($stateParams.listIndex, $stateParams.itemIndex)
 	};
@@ -60,4 +58,5 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	$scope.listIndex = $stateParams.listIndex;
 	
 	
-});
+})
+;

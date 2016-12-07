@@ -15,54 +15,19 @@ db.createTables((err, data) => {
 
 module.exports = {
 	readUser:(req, res, next) => {
-		let rUser = req.user;
-		var user = {
-			id: rUser.id,
-			firstName: rUser.first_name,
-			lastName: rUser.last_name,
-			email: rUser.email,
-			phoneNumber: rUser.phone,
-			allowEmail: rUser.allow_emails,
-			allowText: rUser.allow_texts,
-			lists: [],
-		};
-		
-		
-		
-		db.getLists([rUser.id], (err, listsRes) => {
-			if (err) console.log(err);
-			else {
-				listsRes.forEach((e, i)=>{
-					var list = {
-						id: e.id,
-						name: e.name,
-						icon: e.icon,
-						items: []
-					};
-					
-					db.getItems([e.id],(err, itemRes)=>{
-						if(err) console.log(err);
-						else {
-							itemRes.forEach((ele,ind) =>{
-								var item = {
-									id: ele.id,
-									name: ele.item_name,
-									date: ele.date,
-									description: ele.description,
-								};
-								list.items.push(item);
-							});
-							user.lists.push(list);
-							console.log(user);
-							res.json(user);
-						}
-					});
-					
-					
-					
-				});
-			}
-		});
+		res.json(req.user);
+	},
+	
+	readLists: (req, res, next) => {
+		db.readLists([req.user.id],(err, dbRes)=>{
+			res.json(dbRes);
+		})
+	},
+	
+	readItems: (req, res, next) => {
+		db.readItems([req.user.id],(err, dbRes)=>{
+			res.json(dbRes);
+		})
 	},
 	
 	

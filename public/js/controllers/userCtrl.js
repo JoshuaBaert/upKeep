@@ -10,10 +10,9 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	};
 	
 	$scope.getUser = function () {
-		mainSvc.getUser().then(function (res) {
-			
-			$scope.user = res;
-		});
+		console.log(mainSvc.getUser());
+		$scope.user = mainSvc.getUser()
+		
 	};
 	
 	$scope.postList = function () {
@@ -22,6 +21,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 			$state.reload();
 		}
 	};
+	
 	
 	$scope.putUser = function () {
 		console.log('hit Ctrl');

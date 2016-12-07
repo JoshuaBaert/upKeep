@@ -3,72 +3,93 @@
  */
 
 var user = {
-	id: 1,
-	firstName: 'Joshua',
-	lastName: 'Baert',
-	email: 'jbghoring@gmail.com',
-	phoneNumber: '801-850-8199',
-	allowEmail: true,
-	allowText: true,
-	lists: [
-		{
-			id: 1,
-			name: 'Home',
-			icon: 'fa-home',
-			items: [
-				{
-					id: 1,
-					name: 'Heater air filter',
-					description: 'Change the air filter',
-					date: 1484550000000
-				},
-				{
-					id: 2,
-					name: 'seed lawn',
-					description: 'seed lawn',
-					date: 1498802400000
-				},
-			]
-			
-		},
-		{
-			id: 2,
-			name: 'Civic',
-			icon: 'fa-car',
-			items: [
-				{
-					id: 3,
-					name: 'Fuel Filter',
-					description: 'Change the fuel filter',
-					date: 1484550000000
-				},
-				{
-					id: 4,
-					name: 'Tires',
-					description: 'Get new tires',
-					date: 1484550000000
-				},
-				{
-					id: 5,
-					name: 'Wiper blades',
-					description: 'Change the wiper blades for winter',
-					date: 1484550000000
-				},
-			]
-			
-		}
-	
-	]
+	changed: true,
 };
 
-angular.module('upKeep').service('mainSvc', function ($http) {
+
+
+angular.module('upKeep').service('mainSvc', function ($http, $q) {
+	
+	function getUser () {
+		
+		let gotUser = false;
+		let gotLists = false;
+		let gotItems = false;
+		
+		var ur;
+		var ls;
+		var it;
+		
+		let defer = $q.defer();
+		
+		function giveUser (ur, ls, it) {
+			
+			if (gotItems && gotLists && gotUser) {
+				
+				user.firstName = ur.first_name;
+				user.lastName = ur.last_name;
+				user.allowEmail = ur.allow_emails;
+				user.allowText = ur.allow_texts;
+				user.phoneNumber = ur.phone;
+				user.email = ur.email;
+				user.lists = [];
+				
+				ls.forEach((e,i)=>{
+					let items = [];
+					
+					it.forEach((ele,ind)=>{
+						if(ele.list_id === e.id) {
+							items.push({
+								id: ele.id,
+								name: ele.item_name,
+								date: ele.date,
+								description: ele.description,
+							})
+						}
+					});
+					
+					user.lists.push({
+						id: e.id,
+						name: e.list_name,
+						icon: e.icon,
+						items: items,
+					})
+					
+				});
+				
+				defer.resolve(user);
+			}
+		}
+		
+		$http.get('/api/user').then((res)=>{
+			ur = res.data;
+			gotUser = true;
+			giveUser(ur, ls, it);
+		});
+		$http.get('/api/lists').then((res)=>{
+			ls = res.data;
+			gotLists = true;
+			giveUser(ur, ls, it);
+		});
+		$http.get('/api/items').then((res)=>{
+			it = res.data;
+			gotItems = true;
+			giveUser(ur, ls, it);
+		});
+		return defer.promise
+	}
 	
 	this.getUser = function () {
-		return $http.get('/api/user').then(function (res) {
-			var user = res.data;
-			console.log(user);
+		
+		if (user.changed) {
+			user.changed = false;
+			getUser().then(function (res) {
+				return res
+			});
+		} else {
 			return user
-		})
+		}
+		
 	};
 	
 	
@@ -93,7 +114,7 @@ angular.module('upKeep').service('mainSvc', function ($http) {
 	
 	
 	
-	this.putUser = function (first, last, email, phone, aEmail, aText) {
+	this.putUser = function (first, last, email, phone, atext, aText) {
 		$http.put('/api/user',
 			{
 				firstName: first,

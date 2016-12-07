@@ -22,6 +22,7 @@ CREATE TABLE lists (
 CREATE TABLE items (
   id SERIAL primary key,
   list_id integer references lists(id),
+  user_id integer references users(id),
   item_name varchar(255),
   date bigint,
   description text
@@ -38,13 +39,13 @@ VALUES ('Home', 'fa-home', 1),
 ('Josh', 'fa-male', 2),
 ('Chores', 'fa-home', 2);
 
-INSERT INTO items (item_name, date, description, list_id)
-VALUES ('Seed lawn', 1493532000000, 'Seed the lawn in spring', 1),
-('Furnace Filter', 1493532000000, 'Heater air Filter', 1),
-('Fule Filter', 1493532000000, 'Fuel Filter', 2),
-('Battery', 1493532000000, 'Battery', 2),
-('Check', 1493532000000, 'Check', 2),
-('Flowers', 1493532000000, 'Flowers', 3),
-('Games', 1493532000000, 'Games', 4),
-('Food', 1493532000000, 'Food', 4),
-('jelly', 1493532000000, 'jelly', 5);
+INSERT INTO items (item_name, date, description, list_id, user_id)
+VALUES ('Seed lawn', 1493532000000, 'Seed the lawn in spring', 1, 1),
+('Furnace Filter', 1493532000000, 'Heater air Filter', 1, 1),
+('Fule Filter', 1493532000000, 'Fuel Filter', 2, 1),
+('Battery', 1493532000000, 'Battery', 2, 1),
+('Check', 1493532000000, 'Check', 2, 1),
+('Flowers', 1493532000000, 'Flowers', 3, 1),
+('Games', 1493532000000, 'Games', 4, 2),
+('Food', 1493532000000, 'Food', 4, 2),
+('jelly', 1493532000000, 'jelly', 5, 2);

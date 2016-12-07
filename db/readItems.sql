@@ -1,2 +1,2 @@
 select * from items
-where list_id = $1
+where user_id = $1
