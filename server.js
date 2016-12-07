@@ -17,7 +17,7 @@ const config = require('./config');
 passport.use(new GoogleStrategy({
 		clientID: config.googleClientId,
 		clientSecret: config.googleClientSecret,
-		callbackURL: "http://localhost:" + config.port + "/auth/google/callback"
+		callbackURL: "http://upkeep.baert.io/auth/google/callback"
 	},
 	(accessToken, refreshToken, profile, done) => {
 		
@@ -78,11 +78,11 @@ app.use(passport.session());
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
 app.get('/auth/google/callback', passport.authenticate('google', {
-	successRedirect: 'http://localhost:3030/#/',
+	successRedirect: 'http://upKeep.baert.io/#/',
 	failureRedirect: '/login'
 }), (req, res) => {
 	console.log(req.user);
-	res.redirect('http://localhost:3030/#/');
+	res.redirect('http://upKeep.baert.io/#/');
 });
 
 
