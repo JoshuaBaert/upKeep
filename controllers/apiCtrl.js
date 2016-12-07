@@ -5,6 +5,7 @@
 
 
 const app = require('../server');
+const moment = require('moment');
 
 const db = app.get('db');
 
@@ -35,7 +36,9 @@ module.exports = {
 	
 	readUser: (req, res, next) => {
 		
-		res.json(req.user);
+		db.readUserById([req.user.id],(err, dbRes)=>{
+			res.json(dbRes[0])
+		})
 		
 	},
 	
@@ -56,42 +59,62 @@ module.exports = {
 	
 	
 	createList: (req, res, next) => {
-		console.log(req.body);
-		testUser.lists.push(req.body);
-		res.sendStatus(200);
+		var bd = req.body;
+		db.createList([bd.userId, bd.name, bd.icon], (err, dbRes)=>{
+			if (err) {
+				console.log(err);
+				res.sendStatus(500);
+			}
+			else res.sendStatus(200);
+		})
+		
 	},
 	
 	createItem: (req, res, next) => {
-		let body = req.body;
-		let item = {
-			name: body.name,
-			date: body.date,
-			description: body.description
-		};
-		console.log(body);
-		testUser.lists[body.listIndex].items.push(item);
-		res.sendStatus(200);
+		let bd = req.body;
+		
+		bd.date = moment(bd.date).valueOf();
+		
+		db.createItem([bd.userId, bd.listId, bd.name, bd.date, bd.description], (err, dbRes)=>{
+			if (err) {
+				console.log(err);
+				res.sendStatus(500);
+			} else {
+				res.sendStatus(200);
+			}
+		});
 	},
 	
 	
 	updateUser: (req, res, next) => {
 		console.log(req.body);
 		let body = req.body;
-		testUser.firstName = body.firstName;
-		testUser.lastName = body.lastName;
-		testUser.email = body.email;
-		testUser.phoneNumber = body.phoneNumber;
-		testUser.allowEmail = body.allowEmail;
-		testUser.allowText = body.allowText;
 		
-		res.sendStatus(200);
+		db.updateUser([
+			body.userId,
+			body.firstName,
+			body.lastName,
+			body.email,
+			body.phoneNumber,
+			body.allowEmail,
+			body.allowText
+		], (err, dbRes)=> {
+			res.sendStatus(200);
+		});
+		
 	},
 	
 	updateList: (req, res, next) => {
-		let body = req.body;
-		testUser.lists[body.index].name = body.name;
-		testUser.lists[body.index].icon = body.icon;
-		res.sendStatus(200);
+		let bd = req.body;
+		
+		db.updateList([bd.listId, bd.name, bd.icon], (err, dbRes)=>{
+			if (err) {
+				console.log(err);
+				res.sendStatus(500);
+			} else {
+				res.sendStatus(200);
+			}
+		});
 	},
 	
 	updateItem: (req, res, next) => {

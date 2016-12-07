@@ -28,7 +28,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	
 	$scope.postItem = function () {
 		if ($scope.newItem.name && $scope.newItem.date && $scope.newItem.description) {
-			mainSvc.postItem($scope.listIndex, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
+			mainSvc.postItem($scope.list.id, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
 			$state.reload();
 		}
 	};
@@ -36,7 +36,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	
 	$scope.putList = function () {
 		if ($scope.list.name && $scope.list.icon) {
-			mainSvc.putList($stateParams.listIndex, $scope.list.name, $scope.list.icon);
+			mainSvc.putList($scope.list.id, $scope.list.name, $scope.list.icon);
 		}
 	};
 	

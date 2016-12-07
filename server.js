@@ -22,7 +22,7 @@ passport.use(new GoogleStrategy({
 	(accessToken, refreshToken, profile, done) => {
 		
 		if (profile.provider === 'google') {
-			db.readUserInfo([profile.id], (err, userArr) => {
+			db.readUserByGoogle([profile.id], (err, userArr) => {
 				return done(null, userArr[0]);
 			});
 		} else if (profile.provider === 'facebook') {
@@ -86,7 +86,12 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 });
 
 
+
+
 app.use(apiCtrl.checkAuth);
+/* Need to be authenticated to get past this point otherwise
+   sent a redirect handled by angular Svc*/
+
 
 
 app.get('/api/user', apiCtrl.readUser);

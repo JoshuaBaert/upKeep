@@ -126,14 +126,14 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 
 	$scope.postItem = function () {
 		if ($scope.newItem.name && $scope.newItem.date && $scope.newItem.description) {
-			mainSvc.postItem($scope.listIndex, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
+			mainSvc.postItem($scope.list.id, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
 			$state.reload();
 		}
 	};
 
 	$scope.putList = function () {
 		if ($scope.list.name && $scope.list.icon) {
-			mainSvc.putList($stateParams.listIndex, $scope.list.name, $scope.list.icon);
+			mainSvc.putList($scope.list.id, $scope.list.name, $scope.list.icon);
 		}
 	};
 
@@ -182,7 +182,6 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 
 		mainSvc.getUser().then(function (res) {
 			$scope.user = res;
-			console.log($scope.user);
 		});
 	};
 
@@ -229,7 +228,9 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		function giveUser(ur, ls, it) {
 
 			if (gotItems && gotLists && gotUser) {
+				console.log(ur);
 
+				user.id = ur.id;
 				user.firstName = ur.first_name;
 				user.lastName = ur.last_name;
 				user.allowEmail = ur.allow_emails;
@@ -305,25 +306,29 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
 	this.postList = function (name, icon) {
 		var list = {
+			userId: user.id,
 			name: name,
-			icon: icon,
-			items: []
+			icon: icon
 		};
 
 		$http.post('/api/lists', list);
 	};
 
-	this.postItem = function (listIndex, name, date, description) {
+	this.postItem = function (listId, name, date, description) {
+		console.log(listId);
 		$http.post('/api/item', {
-			listIndex: listIndex,
+			userId: user.id,
+			listId: listId,
 			name: name,
 			date: date,
 			description: description
 		});
 	};
 
-	this.putUser = function (first, last, email, phone, atext, aText) {
+	this.putUser = function (first, last, email, phone, aEmail, aText) {
+		user.changed = true;
 		$http.put('/api/user', {
+			userId: user.id,
 			firstName: first,
 			lastName: last,
 			email: email,
@@ -333,11 +338,11 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		});
 	};
 
-	this.putList = function (listIndex, name, icon) {
+	this.putList = function (listId, name, icon) {
 		$http.put('/api/list', {
+			listId: listId,
 			name: name,
-			icon: icon,
-			index: listIndex
+			icon: icon
 		});
 	};
 
