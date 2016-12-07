@@ -115,28 +115,56 @@ module.exports = {
 				res.sendStatus(200);
 			}
 		});
+		
 	},
 	
 	updateItem: (req, res, next) => {
-		let body = req.body;
-		console.log(req.body);
-		testUser.lists[body.listIndex].items.splice(body.itemIndex, 1, body.item);
-		res.sendStatus(200);
+		let bd = req.body;
+		
+		bd.date = moment(bd.date).valueOf();
+		
+		db.updateItem([bd.itemId, bd.name, bd.date, bd.description], (err, dbRes)=>{
+			if (err) {
+				console.log(err);
+				res.sendStatus(500)
+			} else {
+				res.sendStatus(200);
+			}
+		});
 	},
 	
 	
 	deleteList: (req, res, next) => {
-		let index = req.params.list;
-		console.log('hit API with ', req.params);
-		testUser.lists.splice(index, 1);
-		res.sendStatus(200);
+		let index = req.params.listId;
+		db.deleteListItems([index], (err, dbRes)=>{
+			
+			if(err) {
+				console.log(err);
+				res.sendStatus(500);
+			} else {
+				db.deleteList([index], (err, dbRes)=>{
+				if(err) {
+					console.log(err);
+					res.sendStatus(500);
+				} else {
+					res.sendStatus(200);
+				}
+			});
+			}
+		});
 	},
 	
 	deleteItem: (req, res, next) => {
-		let index = req.params;
-		testUser.lists[index.list].items.splice(index.item, 1);
-		res.sendStatus(200);
+		let index = req.params.itemId;
+		console.log(index);
+		db.deleteItem([index], (err, dbRes)=>{
+			if(err) {
+				console.log(err);
+				res.sendStatus(500);
+			} else {
+				res.sendStatus(200);
+			}
+		});
 	}
-	
 	
 };

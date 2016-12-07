@@ -42,18 +42,18 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	
 	$scope.putItem = function () {
 		if ($scope.editItem.name && $scope.editItem.date && $scope.editItem.description) {
-			mainSvc.putItem($stateParams.listIndex, $stateParams.itemIndex, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
+			mainSvc.putItem($scope.editItem.id, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
 		}
 	};
 	
 	
 	$scope.deleteList = function () {
-		mainSvc.deleteList($stateParams.listIndex)
+		mainSvc.deleteList($scope.list.id)
 	};
 	
 	$scope.deleteItem = function () {
 //		console.log('Ctrl deleting sending ', $stateParams.listIndex, $stateParams.itemIndex);
-		mainSvc.deleteItem($stateParams.listIndex, $stateParams.itemIndex)
+		mainSvc.deleteItem($scope.editItem.id)
 	};
 	
 	

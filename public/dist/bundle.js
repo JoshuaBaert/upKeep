@@ -139,17 +139,17 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 
 	$scope.putItem = function () {
 		if ($scope.editItem.name && $scope.editItem.date && $scope.editItem.description) {
-			mainSvc.putItem($stateParams.listIndex, $stateParams.itemIndex, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
+			mainSvc.putItem($scope.editItem.id, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
 		}
 	};
 
 	$scope.deleteList = function () {
-		mainSvc.deleteList($stateParams.listIndex);
+		mainSvc.deleteList($scope.list.id);
 	};
 
 	$scope.deleteItem = function () {
 		//		console.log('Ctrl deleting sending ', $stateParams.listIndex, $stateParams.itemIndex);
-		mainSvc.deleteItem($stateParams.listIndex, $stateParams.itemIndex);
+		mainSvc.deleteItem($scope.editItem.id);
 	};
 
 	$scope.getUser();
@@ -346,25 +346,22 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		});
 	};
 
-	this.putItem = function (listIndex, itemIndex, name, date, description) {
-		var item = {
+	this.putItem = function (itemId, name, date, description) {
+		$http.put('/api/item', {
+			itemId: itemId,
 			name: name,
 			date: date,
 			description: description
-		};
-		$http.put('/api/item', {
-			listIndex: listIndex,
-			itemIndex: itemIndex,
-			item: item
 		});
 	};
 
-	this.deleteList = function (listIndex) {
-		$http.delete('/api/' + listIndex);
+	this.deleteList = function (listId) {
+		$http.delete('/api/list/' + listId);
 	};
 
-	this.deleteItem = function (listIndex, itemIndex) {
-		$http.delete('/api/' + listIndex + '/' + itemIndex);
+	this.deleteItem = function (itemId) {
+		console.log('hit Svc with ' + itemId);
+		$http.delete('/api/item/' + itemId);
 	};
 });
 //# sourceMappingURL=maps/bundle.js.map

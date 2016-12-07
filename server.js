@@ -108,8 +108,8 @@ app.put('/api/list', apiCtrl.updateList);
 app.put('/api/item', apiCtrl.updateItem);
 
 
-app.delete('/api/:list', apiCtrl.deleteList);
-app.delete('/api/:list/:item', apiCtrl.deleteItem);
+app.delete('/api/list/:listId', apiCtrl.deleteList);
+app.delete('/api/item/:itemId', apiCtrl.deleteItem);
 
 
 
