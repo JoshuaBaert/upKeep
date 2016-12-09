@@ -42,10 +42,10 @@ VALUES ('Home', 'fa-home', 1),
 INSERT INTO items (item_name, date, description, list_id, user_id)
 VALUES ('Seed lawn', 1481180400000, 'Seed the lawn in spring', 1, 1),
 ('Battery', 1493532000000, 'Battery', 2, 1),
-('Check', 1493532000000, 'Check', 2, 1);
---('Furnace Filter', 1481180400000, 'Heater air Filter', 1, 1),
---('Fule Filter', 1481180400000, 'Fuel Filter', 2, 1),
---('Flowers', 1493532000000, 'Flowers', 3, 1),
---('Games', 1493532000000, 'Games', 4, 2),
---('Food', 1493532000000, 'Food', 4, 2),
---('jelly', 1493532000000, 'jelly', 5, 2);
+('Check', 1493532000000, 'Check', 2, 1),
+('Furnace Filter', 1481180400000, 'Heater air Filter', 1, 1),
+('Fuel Filter', 1481180400000, 'Fuel Filter', 2, 1),
+('Flowers', 1493532000000, 'Flowers', 3, 1),
+('Games', 1493532000000, 'Games', 4, 2),
+('Food', 1493532000000, 'Food', 4, 2),
+('jelly', 1493532000000, 'jelly', 5, 2);
