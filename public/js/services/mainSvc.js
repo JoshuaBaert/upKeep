@@ -108,12 +108,6 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	this.postList = function (name, icon) {
 		user.changed = true;
-		user.lists.push({
-			userId: user.id,
-			name: name,
-			icon: icon,
-			items: [],
-		});
 		var list = {
 			userId: user.id,
 			name: name,
