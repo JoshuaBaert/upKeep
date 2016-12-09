@@ -43,6 +43,7 @@ body {
     margin: 0;
   }
   
+  
 }
 
 
@@ -282,12 +283,13 @@ body {
     .list-mini-name {
       background-color: $mainColor;
       border-radius: 5px;
-      min-height: 50px;
+      padding: 3px 0;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 48vw;
     }
+    
     
     .list-mini-length {
       height: 100%;
