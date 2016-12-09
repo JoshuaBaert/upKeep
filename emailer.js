@@ -91,22 +91,26 @@ var db = massive.connectSync({
 				
 			});
 			
-			if (texted) {
-				client.sendMessage({
-					to: '8018508199',
-					from: '3852360320',
-					body: 'Yo Josh.. Looks like someone put an items and got texted =)',
-				}, function (err, data) {
-					if (err) {
-						console.log(err)
-					} else  {
-						console.log(data)
-					}
-				});
-			}
+			
 			
 			
 			setTimeout(function () {
+				if (texted) {
+					let developerAlert = {
+						from: '"no-reply" <no-reply@baert.io>',
+						to: 'developer@baert.io',
+						subject: 'Text alert',
+						text: 'Hey someone just got text alerted by our system',
+					};
+					
+					transporter.sendMail(developerAlert, function (err, info) {
+						if (err) {
+							console.log(err);
+						} else {
+							console.log(info);
+						}
+					});
+				}
 				process.exit(0)
 			}, 60000);
 			

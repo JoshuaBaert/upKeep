@@ -269,7 +269,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
 		$http.get('/api/user').then(function (res) {
 			if (typeof res.data === 'string') {
-				console.log('err thrown redirecting');
+				console.log('Redirect thrown');
 				$state.go('login');
 			} else {
 				ur = res.data;
@@ -319,7 +319,17 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
 	this.postItem = function (listId, name, date, description) {
 		user.changed = true;
-		console.log(listId);
+		user.lists.forEach(function (e, i) {
+			if (e.id = listId) {
+				e.items.push({
+					userId: user.id,
+					listId: listId,
+					name: name,
+					date: date,
+					description: description
+				});
+			}
+		});
 		$http.post('/api/item', {
 			userId: user.id,
 			listId: listId,
@@ -330,7 +340,6 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	};
 
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
-		user.changed = true;
 		user.changed = true;
 		$http.put('/api/user', {
 			userId: user.id,

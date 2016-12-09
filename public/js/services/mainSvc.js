@@ -66,7 +66,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		
 		$http.get('/api/user').then((res)=>{
 			if (typeof res.data === 'string') {
-				console.log('err thrown redirecting');
+				console.log('Redirect thrown');
 				$state.go('login');
 			} else {
 				ur = res.data;
