@@ -46,8 +46,6 @@ passport.use(new GoogleStrategy({
 					});
 				}
 			});
-		} else if (profile.provider === 'facebook') {
-			
 		}
 		
 		return;
