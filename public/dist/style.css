@@ -747,6 +747,7 @@ body {
     border-radius: 10px;
     margin: 7px 2px;
     min-height: 50px;
+    padding: 7px 4px 7px 7px;
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
