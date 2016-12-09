@@ -1,2 +1,2 @@
 cd ..
-su root node emailer.js
+node emailer.js
