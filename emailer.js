@@ -71,7 +71,7 @@ var db = massive.connectSync({
 						}).join('');
 						console.log(phone);
 						
-						/*client.sendMessage({
+						client.sendMessage({
 							to: '+1'+phone,
 							from: '3852360320',
 							body: 'This is upKeep.baert.io reminder of ' + ele.item_name +
@@ -82,8 +82,7 @@ var db = massive.connectSync({
 							} else  {
 								console.log(data)
 							}
-						})*/
-						
+						});
 						
 					}
 					
