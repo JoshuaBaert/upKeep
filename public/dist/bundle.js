@@ -111,6 +111,20 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 		description: undefined
 	};
 
+	$scope.goHome = function () {
+		setTimeout(function () {
+			$state.go('user.home.new', { reload: true });
+			$scope.getUser();
+		}, 650);
+	};
+
+	$scope.goList = function () {
+		setTimeout(function () {
+			$state.go('user.list.new', { listIndex: $stateParams.listIndex }, { reload: true });
+			$scope.getUser();
+		}, 650);
+	};
+
 	$scope.getUser = function () {
 
 		mainSvc.getUser().then(function (res) {
@@ -126,31 +140,86 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	};
 
 	$scope.postItem = function () {
-		if ($scope.newItem.name && $scope.newItem.date && $scope.newItem.description) {
+		if ($scope.newItem.name && $scope.newItem.date) {
 			mainSvc.postItem($scope.list.id, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
 			$state.reload();
+			swal({
+				title: 'Success',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+		} else {
+			swal({
+				title: 'You need both Title and Date',
+				type: 'error'
+			});
 		}
 	};
 
 	$scope.putList = function () {
 		if ($scope.list.name && $scope.list.icon) {
 			mainSvc.putList($scope.list.id, $scope.list.name, $scope.list.icon);
+			$scope.goHome();
+			swal({
+				title: 'Success',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+		} else {
+			swal({
+				title: 'You need both Name and Icon',
+				type: 'error'
+			});
 		}
 	};
 
 	$scope.putItem = function () {
-		if ($scope.editItem.name && $scope.editItem.date && $scope.editItem.description) {
+		if ($scope.editItem.name && $scope.editItem.date) {
 			mainSvc.putItem($scope.editItem.id, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
+			$state.reload();
+			swal({
+				title: 'Success',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+			$state.go('user.home.new');
+		} else {
+			swal({
+				title: 'You need both Title and Date',
+				type: 'error'
+			});
 		}
 	};
 
 	$scope.deleteList = function () {
 		mainSvc.deleteList($scope.list.id);
+		swal({
+			title: 'Success',
+			type: 'success',
+			timer: 750,
+			showConfirmButton: false
+		});
+		setTimeout(function () {
+			$scope.getUser();
+			$state.go('user.home.new');
+		}, 750);
 	};
 
 	$scope.deleteItem = function () {
-		//		console.log('Ctrl deleting sending ', $stateParams.listIndex, $stateParams.itemIndex);
 		mainSvc.deleteItem($scope.editItem.id);
+		swal({
+			title: 'Success',
+			type: 'success',
+			timer: 750,
+			showConfirmButton: false
+		});
+		setTimeout(function () {
+			$scope.getUser();
+			$state.go('user.list.new', { listIndex: $stateParams.listIndex }, { reload: true });
+		}, 750);
 	};
 
 	$scope.getUser();
@@ -179,6 +248,20 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 		icon: undefined
 	};
 
+	$scope.goHome = function () {
+		setTimeout(function () {
+			$state.go('user.home.new', { reload: true });
+			$scope.getUser();
+		}, 650);
+	};
+
+	$scope.goHomeNow = function () {
+		setTimeout(function () {
+			$state.go('user.home.new', { reload: true });
+			$scope.getUser();
+		}, 100);
+	};
+
 	$scope.getUser = function () {
 
 		mainSvc.getUser().then(function (res) {
@@ -190,12 +273,40 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 		if ($scope.newList.name && $scope.newList.icon) {
 			mainSvc.postList($scope.newList.name, $scope.newList.icon);
 			$state.reload();
+			swal({
+				title: 'Success',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+		} else {
+			swal({
+				title: 'You need both Name and Icon',
+				type: 'error'
+			});
 		}
 	};
 
 	$scope.putUser = function () {
-		console.log('hit Ctrl');
-		mainSvc.putUser($scope.user.firstName, $scope.user.lastName, $scope.user.email, $scope.user.phoneNumber, $scope.user.allowEmail, $scope.user.allowText);
+		if (!$scope.user.phoneNumber) {
+			$scope.user.allowText = false;
+		}
+		if ($scope.user.firstName && $scope.user.lastName && $scope.user.email) {
+
+			mainSvc.putUser($scope.user.firstName, $scope.user.lastName, $scope.user.email, $scope.user.phoneNumber, $scope.user.allowEmail, $scope.user.allowText);
+			swal({
+				title: 'Success',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+			$scope.goHome();
+		} else {
+			swal({
+				title: 'You need to have First Name, Last Name & Email',
+				type: 'error'
+			});
+		}
 	};
 
 	$scope.index = $stateParams.listIndex;
@@ -373,6 +484,11 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
 	this.deleteList = function (listId) {
 		user.changed = true;
+		user.lists.forEach(function (e, i) {
+			if (e.id == listId) {
+				user.lists.splice(i, 1);
+			}
+		});
 		$http.delete('/api/list/' + listId);
 	};
 

@@ -177,6 +177,11 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	this.deleteList = function (listId) {
 		user.changed = true;
+		user.lists.forEach((e, i) =>{
+			if (e.id == listId) {
+				user.lists.splice(i,1);
+			}
+		});
 		$http.delete('/api/list/' + listId);
 	};
 	

@@ -21,9 +21,9 @@
 	
 	
 	<div class="btns">
-		<div class="btn" ng-click="putItem()" ui-sref="user.list.new({listIndex: listIndex})" ui-sref-opts="{reload: true}">Save</div>
+		<div class="btn" ng-click="putItem()">Save</div>
 		<div class="btn" ng-click="deleteItem()" ui-sref="user.list.new({listIndex: listIndex})" ui-sref-opts="{reload: true}" close-create>Delete</div>
-		<div class="btn" close-create>Cancel</div>
+		<div class="btn" ng-click="goList()" close-create>Cancel</div>
 	</div>
 
 </div>
