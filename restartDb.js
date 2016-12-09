@@ -7,13 +7,16 @@ const massive = require('massive');
 
 
 let db = massive.connect({
-		connectionString: 'postgres://postgres:test123@localhost/test'
-	},(err, localdb) => {
-//		db = localdb;
-		db.readUserById([1], function (err, res) {
-			console.log(res)
-		});
-		return;
-	});
+	connectionString: 'postgres://postgres:test123@localhost/test'
+}, (err, db) => {
+	db.createTables([], function (err, dbRes) {
+		if (err) {
+			console.log(err)
+		} else {
+			console.log('Reset the database.');
+			process.exit();
+		}
+	})
+	
+});
 
-process.exit();
