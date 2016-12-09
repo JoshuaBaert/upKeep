@@ -57,11 +57,23 @@ body {
   justify-content: flex-start;
   align-items: center;
   
-  .login-logo {
+  .login-text {
     height: 150px;
     width: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     
+  }
+  
+  .login-logo {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   .login-auth {
