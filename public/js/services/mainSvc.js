@@ -119,21 +119,30 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	this.postItem = function (listId, name, date, description) {
 		user.changed = true;
-		console.log(listId);
+		user.lists.forEach(function (e, i) {
+			if (e.id = listId) {
+				e.items.push({
+					userId: user.id,
+					listId: listId,
+					name: name,
+					date: date,
+					description: description,
+				})
+			}
+		});
 		$http.post('/api/item', {
 			userId: user.id,
 			listId: listId,
 			name: name,
 			date: date,
 			description: description,
-		})
+		});
 	};
 	
 	
 	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
-		user.changed = true;
-		user.changed = true;
+		user.changed = true
 		$http.put('/api/user',
 			{
 				userId: user.id,

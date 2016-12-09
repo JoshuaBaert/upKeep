@@ -33,15 +33,15 @@ var db = massive.connectSync({
 	} else {
 		db.readItemsForNotifications([], function (err, dbRes) {
 			items = dbRes;
-			
+			var texted = false;
 //			console.log(items);
 			
 			
 			
 			items.forEach(function (ele, i, arr) {
 				
-				let start = moment().startOf('day').subtract(4,'hours').valueOf();
-				let end = moment().startOf('day').add(20,'hours').valueOf();
+				let start = moment().startOf('day').add(20,'hours').valueOf();
+				let end = moment().startOf('day').add(44,'hours').valueOf();
 				
 				if (start < ele.date && ele.date < end) {
 					
@@ -81,6 +81,7 @@ var db = massive.connectSync({
 								console.log(err)
 							} else  {
 								console.log(data)
+								texted = true;
 							}
 						});
 						
@@ -89,6 +90,21 @@ var db = massive.connectSync({
 				}
 				
 			});
+			
+			if (texted) {
+				client.sendMessage({
+					to: '8018508199',
+					from: '3852360320',
+					body: 'Yo Josh.. Looks like someone put an items and got texted =)',
+				}, function (err, data) {
+					if (err) {
+						console.log(err)
+					} else  {
+						console.log(data)
+					}
+				});
+			}
+			
 			
 			setTimeout(function () {
 				process.exit(0)
