@@ -19,14 +19,14 @@ passport.use(new GoogleStrategy({
 		clientSecret: config.googleClientSecret,
 		callbackURL: "http://upKeep.baert.io/auth/google/callback"
 	},
+	
 	(accessToken, refreshToken, profile, done) => {
 		
-	
 	
 		if (profile.provider === 'google') {
 			
 			db.readUserByGoogle([profile.id], (err, userArr) => {
-				if(userArr[0]){
+				if (userArr[0]) {
 					return done(null, userArr[0]);
 				} else {
 					console.log('attempting account creation');
@@ -35,11 +35,11 @@ passport.use(new GoogleStrategy({
 						profile.name.givenName,
 						profile.name.familyName,
 						profile.emails[0].value
-					], (err, dbRes)=>{
+					], (err, dbRes) => {
 						db.readUserByGoogle([profile.id], (err, userArr) => {
 							if (err) {
 								console.log(err)
-							}else {
+							} else {
 								return done(null, userArr[0]);
 							}
 						});
@@ -53,7 +53,6 @@ passport.use(new GoogleStrategy({
 		return;
 	}
 ));
-
 
 
 
@@ -96,10 +95,12 @@ app.use(session({secret: config.secret, saveUninitialized: true, resave: false,}
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/google', passport.authenticate('google', {scope: [
-	'https://www.googleapis.com/auth/plus.login',
-	'https://www.googleapis.com/auth/plus.profile.emails.read',
-	]}));
+app.get('/auth/google', passport.authenticate('google', {
+	scope: [
+		'https://www.googleapis.com/auth/plus.login',
+		'https://www.googleapis.com/auth/plus.profile.emails.read',
+	]
+}));
 
 app.get('/auth/google/callback', passport.authenticate('google', {
 	successRedirect: 'http://upKeep.baert.io/#/',
@@ -111,10 +112,9 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 
 
 
-
 app.use(apiCtrl.checkAuth);
 /* Need to be authenticated to get past this point otherwise
-   sent a redirect handled by angular Svc*/
+ sent a redirect handled by angular Svc*/
 
 
 

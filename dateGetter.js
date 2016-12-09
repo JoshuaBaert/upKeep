@@ -4,4 +4,8 @@
 
 var moment = require('moment');
 
-console.log(moment('2016-12-07T07:00:00.000Z').valueOf());
+//console.log(moment('2016-12-8').valueOf());
+
+console.log(moment().startOf('day').subtract(4,'hours').valueOf());
+console.log(moment().startOf('day').add(20,'hours').valueOf());
+console.log(moment().startOf('day').valueOf());
