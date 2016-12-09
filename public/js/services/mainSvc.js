@@ -142,7 +142,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 	
 	
 	this.putUser = function (first, last, email, phone, aEmail, aText) {
-		user.changed = true
+		user.changed = true;
 		$http.put('/api/user',
 			{
 				userId: user.id,
