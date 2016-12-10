@@ -1,7 +1,7 @@
 INSERT INTO items (item_name, date, description, list_id, user_id)
 VALUES ('Creating', 1481180400000, 'The + button on the bottom right will create an reminder for the category you care currenlty looking at. To create a new category you can do so with the + sign on the menu bar.', $1, $2),
 ('Navigation', 1481180400000, 'The buttons with the blue background on the left make up the menu bar. The red UpKeep logo will take you to a view of all of your categories. Each individual category will create a new button. The + on the menu bar will always create a new category', $1, $2),
-('Settings', 1481180400000, 'The gear icon at the very bottom of the menu bar will allow you to change information about you, and how you would like to be notified of your reminders', $1, $2),
+('Settings', 1481180400000, 'The gear icon at the very bottom of the menu bar will allow you to change your user profile, and how you would like to be notified of your reminders', $1, $2),
 ('Editing', 1481180400000, 'The pencil icon will allow you to edit the item it is displayed with.', $1, $2),
 ('Reminders', 1481180400000, 'Reminders will be send out the day before the date of the reminder.. They will be sent as SMS or Email depending on your settings.. By default SMS will be disabled, And cannot be enabled unless you add a phone number', $1, $2),
 ('Special Note', 1481180400000, 'Current known bugs. 1. The icon field in categories is incomplete (you can try random words by placing "fa-" infront. Example:"fa-home, fa-list, fa-car" I will be fixing this 2. Sometimes you will need to refresh or click off then back on a page to see new reminders.', $1, $2),
