@@ -2,7 +2,7 @@
  * Created by Joshua Baert on 12/1/2016.
  */
 
-angular.module('upKeep', ['ui.router'])
+angular.module('upKeep', ['ui.router', 'ngMaterial'])
 	.config(function ($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.when('/', '/home');
 		$stateProvider

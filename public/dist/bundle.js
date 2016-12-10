@@ -4,7 +4,7 @@
  * Created by Joshua Baert on 12/1/2016.
  */
 
-angular.module('upKeep', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
+angular.module('upKeep', ['ui.router', 'ngMaterial']).config(function ($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.when('/', '/home');
 	$stateProvider.state('login', {
 		url: '/login',
@@ -105,6 +105,8 @@ angular.module('upKeep').directive('getUser', function () {
 
 angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams, $state, mainSvc) {
 
+	$scope.sizes = ["Home", "Car", "Female", "Truck"];
+
 	$scope.newItem = {
 		name: undefined,
 		date: undefined,
@@ -120,7 +122,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 
 	$scope.goList = function () {
 		setTimeout(function () {
-			$state.go('user.list.new', { listIndex: $stateParams.listIndex }, { reload: true });
+			$state.go('user.list', { listIndex: $stateParams.listIndex }, { reload: true });
 			$scope.getUser();
 		}, 650);
 	};
@@ -144,14 +146,14 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 			mainSvc.postItem($scope.list.id, $scope.newItem.name, $scope.newItem.date, $scope.newItem.description);
 			$state.reload();
 			swal({
-				title: 'Success',
+				title: 'Added new Item',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false
 			});
 		} else {
 			swal({
-				title: 'You need both Title and Date',
+				title: 'You need both Name and Date',
 				type: 'error'
 			});
 		}
@@ -162,7 +164,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 			mainSvc.putList($scope.list.id, $scope.list.name, $scope.list.icon);
 			$scope.goHome();
 			swal({
-				title: 'Success',
+				title: 'Updated list',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false
@@ -180,7 +182,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 			mainSvc.putItem($scope.editItem.id, $scope.editItem.name, $scope.editItem.date, $scope.editItem.description);
 			$state.reload();
 			swal({
-				title: 'Success',
+				title: 'Updated item',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false
@@ -188,7 +190,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 			$state.go('user.home.new');
 		} else {
 			swal({
-				title: 'You need both Title and Date',
+				title: 'You need both Name and Date',
 				type: 'error'
 			});
 		}
@@ -197,7 +199,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	$scope.deleteList = function () {
 		mainSvc.deleteList($scope.list.id);
 		swal({
-			title: 'Success',
+			title: 'Deleted List',
 			type: 'success',
 			timer: 750,
 			showConfirmButton: false
@@ -211,7 +213,7 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	$scope.deleteItem = function () {
 		mainSvc.deleteItem($scope.editItem.id);
 		swal({
-			title: 'Success',
+			title: 'Deleted item',
 			type: 'success',
 			timer: 750,
 			showConfirmButton: false
@@ -248,6 +250,8 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 		icon: undefined
 	};
 
+	$scope.icon = ["Home", "Car", "Female", "Truck"];
+
 	$scope.goHome = function () {
 		setTimeout(function () {
 			$state.go('user.home.new', { reload: true });
@@ -274,7 +278,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 			mainSvc.postList($scope.newList.name, $scope.newList.icon);
 			$state.reload();
 			swal({
-				title: 'Success',
+				title: 'List Added',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false
@@ -295,7 +299,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 
 			mainSvc.putUser($scope.user.firstName, $scope.user.lastName, $scope.user.email, $scope.user.phoneNumber, $scope.user.allowEmail, $scope.user.allowText);
 			swal({
-				title: 'Success',
+				title: 'We have saved your Settings',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false
@@ -309,6 +313,10 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 		}
 	};
 
+	$scope.logout = function () {
+		mainSvc.logout();
+	};
+
 	$scope.index = $stateParams.listIndex;
 
 	$scope.getUser();
@@ -316,11 +324,139 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 'use strict';
 
 /**
+ * Created by Joshua Baert on 12/9/2016.
+ */
+/*
+ * jQuery Dropdown: A simple dropdown plugin
+ *
+ * Contribute: https://github.com/claviska/jquery-dropdown
+ *
+ * @license: MIT license: http://opensource.org/licenses/MIT
+ *
+ */
+if (jQuery) (function ($) {
+
+	$.extend($.fn, {
+		jqDropdown: function jqDropdown(method, data) {
+
+			switch (method) {
+				case 'show':
+					show(null, $(this));
+					return $(this);
+				case 'hide':
+					hide();
+					return $(this);
+				case 'attach':
+					return $(this).attr('data-jq-dropdown', data);
+				case 'detach':
+					hide();
+					return $(this).removeAttr('data-jq-dropdown');
+				case 'disable':
+					return $(this).addClass('jq-dropdown-disabled');
+				case 'enable':
+					hide();
+					return $(this).removeClass('jq-dropdown-disabled');
+			}
+		}
+	});
+
+	function show(event, object) {
+
+		var trigger = event ? $(this) : object,
+		    jqDropdown = $(trigger.attr('data-jq-dropdown')),
+		    isOpen = trigger.hasClass('jq-dropdown-open');
+
+		// In some cases we don't want to show it
+		if (event) {
+			if ($(event.target).hasClass('jq-dropdown-ignore')) return;
+
+			event.preventDefault();
+			event.stopPropagation();
+		} else {
+			if (trigger !== object.target && $(object.target).hasClass('jq-dropdown-ignore')) return;
+		}
+		hide();
+
+		if (isOpen || trigger.hasClass('jq-dropdown-disabled')) return;
+
+		// Show it
+		trigger.addClass('jq-dropdown-open');
+		jqDropdown.data('jq-dropdown-trigger', trigger).show();
+
+		// Position it
+		position();
+
+		// Trigger the show callback
+		jqDropdown.trigger('show', {
+			jqDropdown: jqDropdown,
+			trigger: trigger
+		});
+	}
+
+	function hide(event) {
+
+		// In some cases we don't hide them
+		var targetGroup = event ? $(event.target).parents().addBack() : null;
+
+		// Are we clicking anywhere in a jq-dropdown?
+		if (targetGroup && targetGroup.is('.jq-dropdown')) {
+			// Is it a jq-dropdown menu?
+			if (targetGroup.is('.jq-dropdown-menu')) {
+				// Did we click on an option? If so close it.
+				if (!targetGroup.is('A')) return;
+			} else {
+				// Nope, it's a panel. Leave it open.
+				return;
+			}
+		}
+
+		// Hide any jq-dropdown that may be showing
+		$(document).find('.jq-dropdown:visible').each(function () {
+			var jqDropdown = $(this);
+			jqDropdown.hide().removeData('jq-dropdown-trigger').trigger('hide', { jqDropdown: jqDropdown });
+		});
+
+		// Remove all jq-dropdown-open classes
+		$(document).find('.jq-dropdown-open').removeClass('jq-dropdown-open');
+	}
+
+	function position() {
+
+		var jqDropdown = $('.jq-dropdown:visible').eq(0),
+		    trigger = jqDropdown.data('jq-dropdown-trigger'),
+		    hOffset = trigger ? parseInt(trigger.attr('data-horizontal-offset') || 0, 10) : null,
+		    vOffset = trigger ? parseInt(trigger.attr('data-vertical-offset') || 0, 10) : null;
+
+		if (jqDropdown.length === 0 || !trigger) return;
+
+		// Position the jq-dropdown relative-to-parent...
+		if (jqDropdown.hasClass('jq-dropdown-relative')) {
+			jqDropdown.css({
+				left: jqDropdown.hasClass('jq-dropdown-anchor-right') ? trigger.position().left - (jqDropdown.outerWidth(true) - trigger.outerWidth(true)) - parseInt(trigger.css('margin-right'), 10) + hOffset : trigger.position().left + parseInt(trigger.css('margin-left'), 10) + hOffset,
+				top: trigger.position().top + trigger.outerHeight(true) - parseInt(trigger.css('margin-top'), 10) + vOffset
+			});
+		} else {
+			// ...or relative to document
+			jqDropdown.css({
+				left: jqDropdown.hasClass('jq-dropdown-anchor-right') ? trigger.offset().left - (jqDropdown.outerWidth() - trigger.outerWidth()) + hOffset : trigger.offset().left + hOffset,
+				top: trigger.offset().top + trigger.outerHeight() + vOffset
+			});
+		}
+	}
+
+	$(document).on('click.jq-dropdown', '[data-jq-dropdown]', show);
+	$(document).on('click.jq-dropdown', hide);
+	$(window).on('resize', position);
+})(jQuery);
+'use strict';
+
+/**
  * Created by Joshua Baert on 12/1/2016.
  */
 
 var user = {
-	changed: true
+	changed: true,
+	logout: false
 };
 
 angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
@@ -379,7 +515,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		}
 
 		$http.get('/api/user').then(function (res) {
-			if (typeof res.data === 'string') {
+			if (typeof res.data === 'string' || user.logout) {
 				console.log('Redirect thrown');
 				$state.go('login');
 			} else {
@@ -496,6 +632,21 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		user.changed = true;
 		console.log('hit Svc with ' + itemId);
 		$http.delete('/api/item/' + itemId);
+	};
+
+	this.logout = function () {
+		$http.get('/logout').then(function (res) {
+			user.logout = true;
+			if (typeof res.data === 'string') {
+				swal({
+					title: 'You are now logged out',
+					type: 'success',
+					timer: 2000,
+					showConfirmButton: false
+				});
+				$state.go('login');
+			}
+		});
 	};
 });
 //# sourceMappingURL=maps/bundle.js.map

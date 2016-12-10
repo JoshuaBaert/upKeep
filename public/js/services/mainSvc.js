@@ -4,6 +4,7 @@
 
 var user = {
 	changed: true,
+	logout: false
 };
 
 
@@ -65,7 +66,7 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		}
 		
 		$http.get('/api/user').then((res)=>{
-			if (typeof res.data === 'string') {
+			if (typeof res.data === 'string' || user.logout) {
 				console.log('Redirect thrown');
 				$state.go('login');
 			} else {
@@ -189,7 +190,25 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 		user.changed = true;
 		console.log('hit Svc with ' + itemId);
 		$http.delete('/api/item/' + itemId);
+	};
+	
+	
+	this.logout = function () {
+		$http.get('/logout').then(function (res) {
+			user.logout = true;
+			if (typeof res.data === 'string') {
+				swal({
+					title: 'You are now logged out',
+					type: 'success',
+					timer: 2000,
+					showConfirmButton: false,
+				});
+				$state.go('login');
+			}
+		});
 	}
 	
-	
 });
+
+
+

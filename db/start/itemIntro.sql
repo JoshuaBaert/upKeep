@@ -1,0 +1,5 @@
+INSERT INTO items (item_name, date, description, list_id, user_id)
+VALUES ('Creating', 1481180400000, 'The plus button (Bottom-right) will create a new item for the screen your currently on (So if you are viewing all of your list, this will create a new list. If you are Viewing a list, It will create a new item for that list)... On the left side the create button will always create a new list', $1, $2),
+('Navigation', 1481180400000, 'The buttons on the left are the nav bar. The logo will take you to a view of all of your lists. Each individual list will create a new button on the left side', $1, $2),
+('Editing', 1481180400000, 'The pencil icon next to any item will allow you to edit what the pencil icon is next to', $1, $2),
+('Settings', 1481180400000, 'The gear icon in the bottom left will allow you to change information about you, and how you are okay with be notified', $1, $2);

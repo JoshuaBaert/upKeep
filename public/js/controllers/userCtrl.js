@@ -9,6 +9,13 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 		icon: undefined
 	};
 	
+	$scope.icon = [
+		"Home",
+		"Car",
+		"Female",
+		"Truck"
+	];
+	
 	$scope.goHome = () => {
 		setTimeout(() => {
 			$state.go('user.home.new',{reload: true});
@@ -36,7 +43,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 			mainSvc.postList($scope.newList.name, $scope.newList.icon);
 			$state.reload();
 			swal({
-				title: 'Success',
+				title: 'List Added',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false,
@@ -67,7 +74,7 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 				$scope.user.allowText
 			);
 			swal({
-				title: 'Success',
+				title: 'We have saved your Settings',
 				type: 'success',
 				timer: 750,
 				showConfirmButton: false,
@@ -80,6 +87,11 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 			})
 		}
 		
+	};
+	
+	
+	$scope.logout = function () {
+		mainSvc.logout();
 	};
 	
 	
