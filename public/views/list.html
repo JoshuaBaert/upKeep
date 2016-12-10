@@ -6,7 +6,11 @@
 	
 	<div class="close-wrapper" close-create>
 		<div class="title">
-			<h1>{{list.name}}</h1>
+			<h1>
+				Category:
+				<br>
+				{{list.name}}
+			</h1>
 		</div>
 		
 		<div class="item-wrapper" ng-repeat="item in list.items track by $index">
