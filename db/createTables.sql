@@ -34,9 +34,7 @@ VALUES ('Joshua', 'Baert', 'jbghoring@gmail.com', '801-850-8199', true, true, '1
 INSERT INTO lists (list_name,icon, user_id)
 VALUES ('Home', 'fa-home', 1),
 ('Civic', 'fa-car', 1),
-('Kiery', 'fa-female', 1),
-('Josh', 'fa-male', 2),
-('Chores', 'fa-home', 2);
+('Kiery', 'fa-female', 1);
 
 INSERT INTO items (item_name, date, description, list_id, user_id)
 VALUES ('Seed lawn', 1481180400000, 'Seed the lawn in spring', 1, 1),
