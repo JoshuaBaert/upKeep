@@ -1,5 +1,5 @@
 INSERT INTO items (item_name, date, description, list_id, user_id)
-VALUES ('Creating', 1481180400000, 'The plus button (Bottom-right) will create a new entry for the screen you are currently on (So if you are viewing all of your catagories, this will create a new catagory. If you are Viewing a catagory, It will create a new reminder for that catagory)..', $1, $2),
+VALUES ('Creating', 1481180400000, 'The plus button on the bottom right will create an reminder for the catagory you care currenlty looking at. To create a new catagory you can do so with the + sign button on the nav bar.', $1, $2),
 ('Navigation', 1481180400000, 'The buttons on the left are the nav bar. The logo will take you to a view of all of your catagories. Each individual list will create a new button on the left side. The plus on the nav bar will always create a new catagory', $1, $2),
 ('Settings', 1481180400000, 'The gear icon in the bottom left will allow you to change information about you, and how you are okay with being notified', $1, $2),
 ('Editing', 1481180400000, 'The pencil icon will allow you to edit the item it is display with.', $1, $2),
