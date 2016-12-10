@@ -157,13 +157,15 @@ app.get('/auth/facebook', passport.authenticate('facebook', {
 app.get('/auth/google/callback', passport.authenticate('google', {
 	successRedirect: 'http://upkeep.baert.io/#/',
 	failureRedirect: '/login'
-}), (req, res) => {
+}),
+	(req, res) => {
 	res.redirect('/');
 });
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 	successRedirect: 'http://upkeep.baert.io/#/',
 	failureRedirect: '/login'
-}), (req, res, next) => {
+}),
+	(req, res, next) => {
 	res.redirect('/')
 });
 
