@@ -30,7 +30,6 @@ CREATE TABLE items (
 
 INSERT INTO users (first_name, last_name, email, phone, allow_emails, allow_texts, google_id, facebook_id)
 VALUES ('Joshua', 'Baert', 'jbghoring@gmail.com', '801-850-8199', true, true, '102527176643404312384', null),
-('Kiery', 'Baert', 'kieryclayton@gmail.com', '385-329-4464', true, true, null, null);
 
 INSERT INTO lists (list_name,icon, user_id)
 VALUES ('Home', 'fa-home', 1),
@@ -45,7 +44,4 @@ VALUES ('Seed lawn', 1481180400000, 'Seed the lawn in spring', 1, 1),
 ('Check', 1493532000000, 'Check', 2, 1),
 ('Furnace Filter', 1481180400000, 'Heater air Filter', 1, 1),
 ('Fuel Filter', 1481180400000, 'Fuel Filter', 2, 1),
-('Flowers', 1493532000000, 'Flowers', 3, 1),
-('Games', 1493532000000, 'Games', 4, 2),
-('Food', 1493532000000, 'Food', 4, 2),
-('jelly', 1493532000000, 'jelly', 5, 2);
+('Flowers', 1493532000000, 'Flowers', 3, 1);
