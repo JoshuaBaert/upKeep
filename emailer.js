@@ -49,7 +49,7 @@ var db = massive.connectSync({
 						
 						let mailOptions = {
 							from: '"no-reply" <no-reply@baert.io>',
-							to: 'joshua.kiery@gmail.com',
+							to: 'ele.email',
 							subject: 'Reminder of '+ ele.item_name,
 							text: 'This is upKeep.baert.io reminder of ' + ele.item_name +
 							' the reminder date was set to ' + moment(parseInt(ele.date)).format('l'),
