@@ -18,7 +18,7 @@ const config = require('./config');
 passport.use(new GoogleStrategy({
 		clientID: config.googleClientId,
 		clientSecret: config.googleClientSecret,
-		callbackURL: "http://upkeep.baert.io/auth/google/callback"
+		callbackURL: "/auth/google/callback"
 	},
 	(accessToken, refreshToken, profile, done) => {
 		
@@ -62,7 +62,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
 		clientID: config.facebookId,
 		clientSecret: config.facebookSecret,
-		callbackURL: "http://upkeep.baert.io/auth/facebook/callback",
+		callbackURL: "/auth/facebook/callback",
 		profileFields: ['email', 'name']
 	},
 	(accessToken, refreshToken, profile, done) => {
@@ -155,14 +155,14 @@ app.get('/auth/facebook', passport.authenticate('facebook', {
 }));
 
 app.get('/auth/google/callback', passport.authenticate('google', {
-	successRedirect: 'http://upkeep.baert.io/#/',
+	successRedirect: '/#/',
 	failureRedirect: '/login'
 }),
 	(req, res) => {
 	res.redirect('/');
 });
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-	successRedirect: 'http://upkeep.baert.io/#/',
+	successRedirect: '/#/',
 	failureRedirect: '/login'
 }),
 	(req, res, next) => {
