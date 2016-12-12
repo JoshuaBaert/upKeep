@@ -18,6 +18,7 @@ var items;
 //+config.smtps
 var transporter = nodemailer.createTransport({
 	host: 'smtp.mailgun.org',
+	port: 587,
 	auth: {
 		user: 'postmaster@baert.io',
 		pass: config.smtps
@@ -45,11 +46,13 @@ var db = massive.connectSync({
 				
 				if (start < ele.date && ele.date < end) {
 					
+					console.log(ele.allow_emails, ele.email);
+					
 					if (ele.allow_emails) {
 						
 						let mailOptions = {
 							from: '"no-reply" <no-reply@baert.io>',
-							to: 'ele.email',
+							to: ele.email,
 							subject: 'Reminder of '+ ele.item_name,
 							text: 'This is upKeep.baert.io reminder of ' + ele.item_name +
 							' the reminder date was set to ' + moment(parseInt(ele.date)).format('l'),

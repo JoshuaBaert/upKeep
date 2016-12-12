@@ -8,4 +8,4 @@ var moment = require('moment');
 
 console.log(moment().startOf('day').subtract(4,'hours').valueOf());
 console.log(moment().startOf('day').add(20,'hours').valueOf());
-console.log(moment().startOf('day').valueOf());
+console.log(moment().startOf('day').add(1, 'day').valueOf());

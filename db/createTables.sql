@@ -37,7 +37,7 @@ VALUES ('Home', 'fa-home', 1),
 ('Kiery', 'fa-female', 1);
 
 INSERT INTO items (item_name, date, description, list_id, user_id)
-VALUES ('Seed lawn', 1481180400000, 'Seed the lawn in spring', 1, 1),
+VALUES ('Seed lawn', 1481526000000, 'Seed the lawn in spring', 1, 1),
 ('Battery', 1493532000000, 'Battery', 2, 1),
 ('Check', 1493532000000, 'Check', 2, 1),
 ('Furnace Filter', 1481180400000, 'Heater air Filter', 1, 1),
