@@ -91,7 +91,16 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	
 	
 	$scope.logout = function () {
-		mainSvc.logout();
+		swal({
+			title: 'Do you wanna logout?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Buh Bye',
+			closeOnConfirm: false,
+		}, function () {
+			mainSvc.logout();
+		});
+		
 	};
 	
 	

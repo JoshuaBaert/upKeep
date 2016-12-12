@@ -51,11 +51,12 @@ var db = massive.connectSync({
 					if (ele.allow_emails) {
 						
 						let mailOptions = {
-							from: '"no-reply" <no-reply@baert.io>',
+							from: '"upKeep" <no-reply@baert.io>',
 							to: ele.email,
 							subject: 'Reminder of '+ ele.item_name,
 							text: 'This is upKeep.baert.io reminder of ' + ele.item_name +
-							' the reminder date was set to ' + moment(parseInt(ele.date)).format('l'),
+							' the reminder date was set to ' + moment(parseInt(ele.date)).format('l') +
+							'..   With the description: ' +  ele.description,
 						};
 						
 						transporter.sendMail(mailOptions, function (err, info) {

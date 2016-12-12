@@ -197,31 +197,49 @@ angular.module('upKeep').controller('listsCtrl', function ($scope, $stateParams,
 	};
 
 	$scope.deleteList = function () {
-		mainSvc.deleteList($scope.list.id);
 		swal({
-			title: 'Deleted List',
-			type: 'success',
-			timer: 750,
-			showConfirmButton: false
+			title: 'Are you sure you wanna delete this List',
+			text: 'You cannot come back form this!!',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, delete it.',
+			closeOnConfirm: false
+		}, function () {
+			mainSvc.deleteList($scope.list.id);
+			swal({
+				title: 'Deleted List',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+			setTimeout(function () {
+				$scope.getUser();
+				$state.go('user.home.new');
+			}, 750);
 		});
-		setTimeout(function () {
-			$scope.getUser();
-			$state.go('user.home.new');
-		}, 750);
 	};
 
 	$scope.deleteItem = function () {
-		mainSvc.deleteItem($scope.editItem.id);
 		swal({
-			title: 'Deleted item',
-			type: 'success',
-			timer: 750,
-			showConfirmButton: false
+			title: 'Are you sure you wanna delete this Item',
+			text: 'You cannot come back form this!!',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, delete it.',
+			closeOnConfirm: false
+		}, function () {
+			mainSvc.deleteItem($scope.editItem.id);
+			swal({
+				title: 'Deleted item',
+				type: 'success',
+				timer: 750,
+				showConfirmButton: false
+			});
+			setTimeout(function () {
+				$scope.getUser();
+				$state.go('user.list.new', { listIndex: $stateParams.listIndex }, { reload: true });
+			}, 750);
 		});
-		setTimeout(function () {
-			$scope.getUser();
-			$state.go('user.list.new', { listIndex: $stateParams.listIndex }, { reload: true });
-		}, 750);
 	};
 
 	$scope.getUser();
@@ -314,7 +332,15 @@ angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stat
 	};
 
 	$scope.logout = function () {
-		mainSvc.logout();
+		swal({
+			title: 'Do you wanna logout?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Buh Bye',
+			closeOnConfirm: false
+		}, function () {
+			mainSvc.logout();
+		});
 	};
 
 	$scope.index = $stateParams.listIndex;
