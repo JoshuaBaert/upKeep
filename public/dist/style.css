@@ -1111,8 +1111,8 @@ body {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center; }
-  .side-panel-main .edit-input {
-    width: auto; }
+  .side-panel-main .icon-input {
+    width: 200px; }
   .side-panel-main .dropdown {
     display: -webkit-box;
     display: -webkit-flex;
