@@ -116,7 +116,7 @@ var db = massive.connectSync({
 					});
 				}
 				process.exit(0)
-			}, 60000);
+			}, 15000);
 			
 			
 		});

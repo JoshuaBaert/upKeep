@@ -12,6 +12,11 @@ $lightColor: #FEFEFE;
 
 $font: 'Reem Kufi', sans-serif;
 
+@-ms-viewport {
+  width: device-width;
+  max-width: 550px;
+}
+
 body {
   box-sizing: border-box;
   font-family: $font;

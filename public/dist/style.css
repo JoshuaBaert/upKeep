@@ -500,6 +500,10 @@ template {
   
 */
 @import url("https://fonts.googleapis.com/css?family=Reem+Kufi");
+@-ms-viewport {
+  width: device-width;
+  max-width: 550px; }
+
 body {
   box-sizing: border-box;
   font-family: "Reem Kufi", sans-serif; }
