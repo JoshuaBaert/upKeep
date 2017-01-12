@@ -1,6 +1,5 @@
 .idea
 node_modules
 config.js
-./public/node_modules
-./public/font-awesome
+public/font-awesome
 temp.js
