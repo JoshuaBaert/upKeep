@@ -39,11 +39,11 @@ passport.use(new GoogleStrategy({
 							console.log(err)
 						} else {
 							db.start.listIntro([userArr[0].id], (err) => {
-								db.start.getNewId([userArr[0].id],(err, dbRes) => {
+								db.start.getNewId([userArr[0].id], (err, dbRes) => {
 									if (err) console.log(err);
-									db.start.itemIntro([dbRes[0].id, userArr[0].id],(err) => {
+									db.start.itemIntro([dbRes[0].id, userArr[0].id], (err) => {
 										if (err) console.log(err);
-										done(null,userArr[0])
+										done(null, userArr[0])
 									})
 								})
 							});
@@ -85,11 +85,11 @@ passport.use(new FacebookStrategy({
 							console.log(err)
 						} else {
 							db.start.listIntro([userArr[0].id], (err) => {
-								db.start.getNewId([userArr[0].id],(err, dbRes) => {
+								db.start.getNewId([userArr[0].id], (err, dbRes) => {
 									if (err) console.log(err);
-									db.start.itemIntro([dbRes[0].id, userArr[0].id],(err) => {
+									db.start.itemIntro([dbRes[0].id, userArr[0].id], (err) => {
 										if (err) console.log(err);
-										done(null,userArr[0])
+										done(null, userArr[0])
 									})
 								})
 							});
@@ -155,19 +155,39 @@ app.get('/auth/facebook', passport.authenticate('facebook', {
 }));
 
 app.get('/auth/google/callback', passport.authenticate('google', {
-	successRedirect: '/#/',
-	failureRedirect: '/login'
-}),
+		successRedirect: '/#/',
+		failureRedirect: '/login'
+	}),
 	(req, res) => {
-	res.redirect('/');
-});
+		res.redirect('/');
+	});
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-	successRedirect: '/#/',
-	failureRedirect: '/login'
-}),
+		successRedirect: '/#/',
+		failureRedirect: '/login'
+	}),
 	(req, res, next) => {
-	res.redirect('/')
-});
+		res.redirect('/')
+	});
+
+
+
+app.post('/dummy', (req, res, next) => {
+	user = {
+		id: 2,
+		first_name: 'Guest',
+		last_name: 'User',
+		email: 'Email@Fake.com',
+		phone: '555-555-5555',
+		allow_emails: true,
+		allow_texts: true,
+		facebook_id: null,
+		google_id: null,
+	};
+	req.login(user, () => {
+		res.sendStatus(200);
+	})
+	
+})
 
 
 
