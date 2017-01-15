@@ -505,6 +505,8 @@ template {
   max-width: 550px; }
 
 body {
+  background: #dddddd;
+  height: 100vh;
   box-sizing: border-box;
   font-family: "Reem Kufi", sans-serif; }
   body a {
@@ -651,7 +653,22 @@ body {
     -ms-flex-align: center;
     align-items: center; }
 
+.background {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #dddddd;
+  overflow: scroll; }
+
 .user-view {
+  background: #ffffff;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -660,10 +677,13 @@ body {
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
-  flex-direction: row; }
+  flex-direction: row;
+  max-width: 550px;
+  overflow: hidden; }
   .user-view .nav-main {
     min-height: 100vh;
     width: 20vw;
+    max-width: 110px;
     background-color: #66C7F4;
     display: -webkit-box;
     display: -webkit-flex;
@@ -701,11 +721,12 @@ body {
       -ms-flex-pack: start;
       justify-content: flex-start; }
     .user-view .nav-main .btn {
-      margin: 1vw;
       width: 18vw;
+      max-width: 100px;
       height: 18vw;
+      max-height: 100px;
       background-color: #B2FFD6;
-      border-radius: 10px;
+      border-radius: 15px;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -724,7 +745,9 @@ body {
       background-color: transparent; }
       .user-view .nav-main .mini-logo .logo-mini {
         width: 18vw;
-        height: 18vw; }
+        max-width: 100px;
+        height: 18vw;
+        max-height: 100px; }
     .user-view .nav-main .list-logo {
       margin: 1vw 1vw 2vw; }
     .user-view .nav-main .icon {
@@ -754,7 +777,9 @@ body {
     bottom: 5vw;
     right: 5vw;
     height: 16vw;
+    max-height: 88px;
     width: 16vw;
+    max-width: 88px;
     background-color: #66C7F4;
     border-radius: 8vw;
     display: -webkit-box;
@@ -771,10 +796,6 @@ body {
     justify-content: center; }
     .user-view .create .icon {
       font-size: 10vw; }
-  .user-view .close-wrapper {
-    width: 100%;
-    min-height: 75vh;
-    margin-bottom: 25vw; }
   .user-view .edit-btn {
     margin: 10px 0;
     background-color: #66C7F4;
@@ -802,6 +823,8 @@ body {
     top: 0;
     height: 100vh;
     width: 0;
+    max-width: 550px;
+    overflow: hidden;
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
     .user-view .side-panel .close {
@@ -809,7 +832,9 @@ body {
       top: 16px;
       left: 4vw;
       height: 10vw;
+      max-height: 55px;
       width: 10vw;
+      max-width: 55px;
       background-color: #66C7F4;
       border-radius: 5vw;
       display: -webkit-box;
@@ -862,6 +887,7 @@ body {
 .home-main {
   min-height: 100vh;
   width: 80vw;
+  max-width: 440px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -884,7 +910,7 @@ body {
     border-radius: 10px;
     margin: 7px 2px;
     padding: 7px 4px 7px 7px;
-    max-width: 80vw;
+    width: 90%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -918,9 +944,9 @@ body {
       -webkit-justify-content: center;
       -ms-flex-pack: center;
       justify-content: center;
-      width: 60vw; }
+      width: 85%; }
     .home-main .list-mini .list-mini-btns {
-      width: 10vw;
+      width: 15%;
       height: 100%;
       display: -webkit-box;
       display: -webkit-flex;
@@ -938,6 +964,7 @@ body {
 .settings-main {
   min-height: 100vh;
   width: 80vw;
+  max-width: 440px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -989,7 +1016,9 @@ body {
     bottom: 5vw;
     right: 5vw;
     height: 16vw;
+    max-height: 88px;
     width: 16vw;
+    max-width: 88px;
     background-color: #66C7F4;
     border-radius: 2vw;
     display: -webkit-box;
@@ -1010,6 +1039,7 @@ body {
 .list-main {
   min-height: 100vh;
   width: 80vw;
+  max-width: 440px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1027,13 +1057,15 @@ body {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start; }
+  .list-main .create-margin {
+    padding: 0 0 24vw; }
   .list-main .item-wrapper {
     background-color: #B2FFD6;
     border-radius: 10px;
     margin: 7px 2px 7px 0;
     padding: 7px 4px 7px 7px;
     min-height: 50px;
-    man-width: 80vw;
+    max-width: 80vw;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1076,6 +1108,7 @@ body {
 .side-panel-main {
   width: 100%;
   min-height: 100vh;
+  max-width: 550px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1135,6 +1168,39 @@ body {
     min-width: 25px; }
     .side-panel-main .dropdown .radio-wrapper {
       margin: 5px; }
+
+@media (min-width: 550px) {
+  .user-view .nav-main .list-logo {
+    margin: 5.5px 5.5px 11px; }
+  .user-view .nav-main .icon {
+    font-size: 79px; }
+  .user-view .create {
+    bottom: 27.5px;
+    right: 50%;
+    -webkit-transform: translateX(248px);
+    -ms-transform: translateX(248px);
+    transform: translateX(248px); }
+    .user-view .create .icon {
+      font-size: 66px; }
+  .user-view .side-panel {
+    right: 50%;
+    -webkit-transform: translateX(275px);
+    -ms-transform: translateX(275px);
+    transform: translateX(275px); }
+    .user-view .side-panel .close {
+      left: 21px; }
+      .user-view .side-panel .close .icon {
+        font-size: 22px; }
+  .settings-main .logout {
+    bottom: 27.5px;
+    right: 50%;
+    -webkit-transform: translateX(248px);
+    -ms-transform: translateX(248px);
+    transform: translateX(248px); }
+    .settings-main .logout .icon {
+      font-size: 66px; }
+  .list-main .create-margin {
+    padding: 0 0 132px; } }
 
 .hide {
   display: none;
