@@ -3,7 +3,7 @@
  */
 
 var openSpeed = 500;
-var openWidth = '580px';
+var openWidth = '100vw';
 
 angular.module('upKeep')
 	.directive('getUser', function () {
