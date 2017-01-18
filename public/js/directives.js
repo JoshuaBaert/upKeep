@@ -2,8 +2,8 @@
  * Created by Joshua Baert on 12/2/2016.
  */
 
-var openSpeed = 100;
-var openWidth = '101vw';
+var openSpeed = 500;
+var openWidth = '580px';
 
 angular.module('upKeep')
 	.directive('getUser', function () {

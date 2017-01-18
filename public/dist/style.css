@@ -1184,9 +1184,9 @@ body {
       font-size: 66px; }
   .user-view .side-panel {
     right: 50%;
-    -webkit-transform: translateX(275px);
-    -ms-transform: translateX(275px);
-    transform: translateX(275px); }
+    -webkit-transform: translateX(265px);
+    -ms-transform: translateX(265px);
+    transform: translateX(265px); }
     .user-view .side-panel .close {
       left: 21px; }
       .user-view .side-panel .close .icon {
