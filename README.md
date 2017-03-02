@@ -1,2 +1,12 @@
 # UpKeep
-[link](http://upkeep.baert.io)asfdasdf
+## Angular project
+
+### Tech Used
+
+Major Tech used
+* Angular
+* Expess
+* Node
+asdf* PostgreSQL
+
+
