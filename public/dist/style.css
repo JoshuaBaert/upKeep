@@ -679,7 +679,8 @@ body {
   -ms-flex-direction: row;
   flex-direction: row;
   max-width: 550px;
-  overflow: hidden; }
+  overflow: hidden;
+  margin: 0 0 2px 0; }
   .user-view .nav-main {
     min-height: 95vh;
     width: 20vw;
@@ -1058,6 +1059,7 @@ body {
   -ms-flex-pack: start;
   justify-content: flex-start; }
   .list-main .create-margin {
+    width: 95%;
     padding: 0 0 24vw; }
   .list-main .item-wrapper {
     background-color: #B2FFD6;

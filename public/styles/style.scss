@@ -154,6 +154,7 @@ body {
   flex-direction: row;
   max-width: 550px;
   overflow: hidden;
+  margin: 0 0 2px 0;
   
   
   .nav-main {
@@ -437,6 +438,7 @@ body {
   justify-content: flex-start;
   
   .create-margin {
+    width: 95%;
     padding: 0 0 24vw;
   }
   
