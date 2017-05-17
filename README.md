@@ -27,7 +27,7 @@ For the sake of security I only have done OAuth this being my first project. Cli
 
 The frist view you will see will look like this. This is where all of your existing lists will be. There will be one created for you by default with a bunch of helper items.
 
-![image](https://cloud.githubusercontent.com/assets/22752236/26174102/daaa730c-3b13-11e7-9aa8-88f19c4dd02b.png)
+![image](https://cloud.githubusercontent.com/assets/22752236/26174946/a052d818-3b16-11e7-8e87-a751133dadbc.png)
 
 You can create a new list by clicking the plus sign on the left nav bar at the bottom of the top section
 
