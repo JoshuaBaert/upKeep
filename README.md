@@ -1,3 +1,20 @@
-This is to showcase my abilities anyone is welcome to check my code out
+# UpKeep
 
-Font awesome is used but not uploaded to git.. will need to be added to public folder
+### Tech Used
+
+Major Tech Used
+* Angular
+* Expess
+* Node
+* PostgreSQL
+
+Minor Tech Used
+* twillio
+
+### Description
+
+This was a personal project that is meant as a reminder and to-do app. It will send out texts/emails to remind you about the items you create
+
+### Use
+
+(in Work)
