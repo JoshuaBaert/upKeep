@@ -33,20 +33,20 @@ module.exports = {
 
     readUser: (req, res, next) => {
 
-        db.q.readUserById([req.user.id], (err, dbRes) => {
+        db.q.readUserById([2], (err, dbRes) => {
             res.json(dbRes[0]);
         });
     },
 
     readLists: (req, res, next) => {
-        db.q.readLists([req.user.id], (err, dbRes) => {
+        db.q.readLists([2], (err, dbRes) => {
             if (err) console.log(err);
             res.json(dbRes);
         });
     },
 
     readItems: (req, res, next) => {
-        db.q.readItems([req.user.id], (err, dbRes) => {
+        db.q.readItems([2], (err, dbRes) => {
             if (err) console.log(err);
             res.json(dbRes);
         });
