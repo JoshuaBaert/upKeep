@@ -1,5 +1,8 @@
+
 .idea
 node_modules
 config.js
 temp.js
 package-lock.json
+public/dist
+
