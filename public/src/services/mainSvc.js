@@ -12,9 +12,6 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
 
     function getUser() {
-
-        console.log('Getting user.');
-
         let gotUser = false;
         let gotLists = false;
         let gotItems = false;
@@ -67,7 +64,6 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
         $http.get('/api/user').then((res) => {
             if (typeof res.data === 'string' || user.logout) {
-                console.log('Redirect thrown');
                 $state.go('login');
             } else {
                 ur = res.data;
@@ -185,7 +181,6 @@ angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
     this.deleteItem = function (itemId) {
         user.changed = true;
-        console.log('hit Svc with ' + itemId);
         $http.delete('/api/item/' + itemId);
     };
 

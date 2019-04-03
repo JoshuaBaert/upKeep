@@ -12,7 +12,6 @@ var concat = require('gulp-concat');
 var print = require('gulp-print');
 var babel = require('gulp-babel');
 var autoPrefixer = require('gulp-autoprefixer');
-var livereload = require('gulp-livereload');
 
 var CacheBuster = require('gulp-cachebust');
 var cacheBust = new CacheBuster();
@@ -38,7 +37,6 @@ gulp.task('build-css', function () {
         .pipe(concat('style.css'))
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./dist'));
-//			.pipe(livereload());
 });
 
 
@@ -49,8 +47,7 @@ gulp.task('build-js', function () {
         .pipe(babel({ presets: ['es2015'] }))
         .pipe(concat('bundle.js'))
         .pipe(sourcemaps.write('./maps'))
-        .pipe(gulp.dest('./dist'))
-        .pipe(livereload());
+        .pipe(gulp.dest('./dist'));
 });
 
 
@@ -58,12 +55,10 @@ gulp.task('build', ['clean', 'build-css', 'build-js'], function () {
     return gulp.src('index.html')
         .pipe(cacheBust.references())
         .pipe(gulp.dest('dist'));
-//			.pipe(livereload());
 });
 
 
 gulp.task('watch', function () {
-    livereload.listen();
     gulp.start('build');
     gulp.watch(['./index.html', './views/**/*.html', './styles/*.*ss', './src/**/*.js'], ['build']);
 });

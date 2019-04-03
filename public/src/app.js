@@ -45,3 +45,14 @@ angular.module('upKeep', ['ui.router', 'ngMaterial'])
             });
         $urlRouterProvider.otherwise('/login');
     });
+
+// require('./controllers/listCtrl');
+// require('./controllers/mainCtrl');
+// require('./controllers/userCtrl');
+//
+// require('./directives/directives');
+//
+// require('./services/mainSvc');
+//
+// // Misc
+// require('./jq-dropdown/jq-dropdown');
