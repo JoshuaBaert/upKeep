@@ -1,6 +1,5 @@
 .idea
 node_modules
 config.js
-public/font-awesome
 temp.js
 package-lock.json
