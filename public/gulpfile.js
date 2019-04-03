@@ -43,7 +43,7 @@ gulp.task('build-css', function () {
 
 
 gulp.task('build-js', function () {
-    return gulp.src('js/**/*.js')
+    return gulp.src('src/**/*.js')
         .pipe(sourcemaps.init())
         .pipe(print())
         .pipe(babel({ presets: ['es2015'] }))
@@ -65,12 +65,12 @@ gulp.task('build', ['clean', 'build-css', 'build-js'], function () {
 gulp.task('watch', function () {
     livereload.listen();
     gulp.start('build');
-    gulp.watch(['./index.html', './views/**/*.html', './styles/*.*ss', './js/**/*.js'], ['build']);
+    gulp.watch(['./index.html', './views/**/*.html', './styles/*.*ss', './src/**/*.js'], ['build']);
 });
 
 
 gulp.task('default', function () {
-    gulp.start('watch');
+    gulp.start('build');
 });
 
 
