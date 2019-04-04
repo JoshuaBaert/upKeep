@@ -9,8 +9,9 @@ import '../styles/jquery.dropdown.css';
 import '../styles/reset.css';
 import '../styles/style.scss';
 
-declare const angular;
-
+export declare const angular;
+export declare const swal;
+export declare const $;
 
 angular.module('upKeep', ['ui.router', 'ngMaterial'])
     .config(function ($stateProvider, $urlRouterProvider) {

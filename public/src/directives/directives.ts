@@ -1,6 +1,8 @@
 /**
  * Created by Joshua Baert on 12/2/2016.
  */
+declare const angular;
+declare const $;
 
 var openSpeed = 500;
 var openWidth = '100vw';
