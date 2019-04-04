@@ -1,23 +1,21 @@
 /*
-  upKeep for fun
-  
-*/
-@import url('https://fonts.googleapis.com/css?family=Reem+Kufi');
+ * upKeep for fun
+ */
 
-
+@import url('https://fonts.googleapis.com/css?family=Heebo');
 
 $mainColor: #66C7F4;
 $secondColor: #B2FFD6;
 $lightColor: #FEFEFE;
-
 $height: calc(100vh - 2px);
+$font:  'Heebo', sans-serif;
 
-$font: 'Reem Kufi', sans-serif;
 
 @-ms-viewport {
     width: device-width;
     max-width: 550px;
 }
+
 
 body {
     background: #dddddd;
@@ -54,10 +52,7 @@ body {
     h5 {
         margin: 0;
     }
-    
-    
 }
-
 
 
 .login-main {
@@ -75,7 +70,6 @@ body {
         align-items: center;
         justify-content: center;
         text-align: center;
-        
     }
     
     .login-logo {
@@ -106,6 +100,7 @@ body {
             justify-content: center;
             align-items: center;
         }
+
         .facebook-btn {
             margin: 5px;
             color: $lightColor;
@@ -147,7 +142,6 @@ body {
 }
 
 
-
 .user-view {
     background: #ffffff;
     display: flex;
@@ -155,7 +149,6 @@ body {
     max-width: 550px;
     overflow: hidden;
     margin: 0 0 2px 0;
-    
     
     .nav-main {
         min-height: 95vh;
@@ -167,7 +160,6 @@ body {
         align-items: center;
         justify-content: space-between;
         
-        
         .nav-lists {
             display: flex;
             flex-direction: column;
@@ -175,6 +167,7 @@ body {
             justify-content: flex-start;
             
         }
+        
         .btn {
             
             width: 18vw;
@@ -194,7 +187,7 @@ body {
         
         .mini-logo {
             background-color: transparent;
-            
+    
             .logo-mini {
                 width: 18vw;
                 max-width: 100px;
@@ -202,7 +195,6 @@ body {
                 max-height: 100px;
             }
         }
-        
         
         .list-logo {
             margin: 1vw 1vw 2vw;
@@ -212,9 +204,6 @@ body {
             font-size: 14vw;
         }
     }
-    
-    
-    
     
     .title {
         margin-top: 8px;
@@ -244,7 +233,6 @@ body {
         }
     }
     
-    
     .edit-btn {
         margin: 10px 0;
         background-color: $mainColor;
@@ -255,7 +243,6 @@ body {
         align-items: center;
         justify-content: center;
     }
-    
     
     .side-panel {
         margin: 0;
@@ -290,6 +277,7 @@ body {
             }
         }
     }
+    
     .btns {
         display: flex;
         flex-direction: row;
@@ -316,11 +304,7 @@ body {
         min-height: 40px;
         width: 250px;
     }
-    
-    
-    
 }
-
 
 
 .home-main {
@@ -343,7 +327,6 @@ body {
         align-items: center;
         justify-content: space-between;
         
-        
         .list-mini-name {
             background-color: $mainColor;
             border-radius: 5px;
@@ -352,7 +335,6 @@ body {
             align-items: center;
             justify-content: center;
             width: 85%;
-            
         }
         
         .list-mini-btns {
@@ -362,9 +344,7 @@ body {
             align-items: center;
             justify-content: center;
         }
-        
     }
-    
 }
 
 
@@ -389,13 +369,16 @@ body {
         align-items: center;
         
     }
+    
     .check {
         justify-content: space-around;
     }
+    
     .set-titles {
         margin-left: 5px;
         min-width: 85px;
     }
+    
     .set-input {
         margin-right: 5px;
         width: 100%;
@@ -419,11 +402,6 @@ body {
             font-size: 12vw;
         }
     }
-    
-    
-    
-    
-    
 }
 
 
@@ -455,6 +433,7 @@ body {
         justify-content: center;
         
     }
+    
     .item-row {
         box-sizing: border-box;
         padding: 5px 10px 5px 5px;
@@ -505,14 +484,12 @@ body {
         .radio-wrapper {
             margin: 5px;
         }
-        
     }
 }
 
 
 @media (min-width: 550px) {
     .user-view {
-        
         .nav-main {
             .list-logo{
                 margin: 5.5px 5.5px 11px;
@@ -543,11 +520,9 @@ body {
                 }
             }
         }
-        
     }
     
     .settings-main {
-        
         .logout {
             bottom: 27.5px;
             right: 50%;
@@ -559,14 +534,9 @@ body {
     }
     
     .list-main {
-        
         .create-margin {
             padding: 0 0 132px;
         }
-    }
-    
-    .side-panel-main {
-    
     }
 }
 
@@ -575,5 +545,3 @@ body {
     display: none;
     transition: all 0.5s;
 }
-
-

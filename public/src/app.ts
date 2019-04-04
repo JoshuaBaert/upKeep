@@ -1,6 +1,16 @@
-/**
- * Created by Joshua Baert on 12/1/2016.
- */
+import 'angular';
+import 'angular-ui-router';
+import 'angular-animate';
+import 'angular-aria';
+import 'angular-messages';
+import 'angular-material';
+
+import '../styles/jquery.dropdown.css';
+import '../styles/reset.css';
+import '../styles/style.scss';
+
+declare const angular;
+
 
 angular.module('upKeep', ['ui.router', 'ngMaterial'])
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -46,13 +56,16 @@ angular.module('upKeep', ['ui.router', 'ngMaterial'])
         $urlRouterProvider.otherwise('/login');
     });
 
-// require('./controllers/listCtrl');
-// require('./controllers/mainCtrl');
-// require('./controllers/userCtrl');
-//
-// require('./directives/directives');
-//
-// require('./services/mainSvc');
-//
-// // Misc
-// require('./jq-dropdown/jq-dropdown');
+// Controllers
+require('./controllers/listCtrl');
+require('./controllers/mainCtrl');
+require('./controllers/userCtrl');
+
+// Directives
+require('./directives/directives');
+
+// Services
+require('./services/mainSvc');
+
+// Misc
+require('./jq-dropdown/jq-dropdown');
