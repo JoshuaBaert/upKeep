@@ -13,7 +13,6 @@
 
     angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
 
-
         function getUser() {
             let gotUser = false;
             let gotLists = false;
