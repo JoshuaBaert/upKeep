@@ -17,6 +17,7 @@ massive.connect({
             console.log('Reset the database');
             console.log(res);
         }
+        process.exit()
     });
     return;
 });
