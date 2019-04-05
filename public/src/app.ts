@@ -36,8 +36,7 @@ angular.module('upkeep', [
         templateUrl: './views/settings.html',
     }).state('user.home', {
         url: '',
-        template: '<up-home></up-home>',
-        // component: 'upkeep.home',
+        component: 'ukHome',
     }).state('user.home.new', {
         url: 'home',
         templateUrl: './views/side/newList.html',

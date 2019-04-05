@@ -9,7 +9,6 @@ import { BaseComponent } from '../models/base-component';
 
         constructor(private mainSvc) {
             super();
-            this.vm = this;
             this.$inject = ['mainSvc'];
         }
 
@@ -25,7 +24,7 @@ import { BaseComponent } from '../models/base-component';
     }
 
     angular.module('upkeep.home')
-        .component('upHome', {
+        .component('ukHome', {
             template: template,
             controller: HomeComponent,
             controllerAs: 'vm',
