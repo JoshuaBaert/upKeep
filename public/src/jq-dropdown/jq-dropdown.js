@@ -13,7 +13,6 @@ if (jQuery) (function ($) {
 
     $.extend($.fn, {
         jqDropdown: function (method, data) {
-
             switch (method) {
                 case 'show':
                     show(null, $(this));
@@ -32,20 +31,16 @@ if (jQuery) (function ($) {
                     hide();
                     return $(this).removeClass('jq-dropdown-disabled');
             }
-
         },
     });
 
     function show(event, object) {
-
         var trigger = event ? $(this) : object,
             jqDropdown = $(trigger.attr('data-jq-dropdown')),
             isOpen = trigger.hasClass('jq-dropdown-open');
-
         // In some cases we don't want to show it
         if (event) {
             if ($(event.target).hasClass('jq-dropdown-ignore')) return;
-
             event.preventDefault();
             event.stopPropagation();
         } else {

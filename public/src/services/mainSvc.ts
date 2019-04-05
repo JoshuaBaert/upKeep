@@ -117,7 +117,7 @@
         this.postItem = function (listId, name, date, description) {
             user.changed = true;
             user.lists.forEach(function (e, i) {
-                if (e.id = listId) {
+                if (e.id == listId) {
                     e.items.push({
                         userId: user.id,
                         listId: listId,

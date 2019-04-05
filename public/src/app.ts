@@ -5,6 +5,7 @@ import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
 
+import './jq-dropdown/jq-dropdown';
 import '../styles/jquery.dropdown.css';
 import '../styles/reset.css';
 import '../styles/style.scss';
