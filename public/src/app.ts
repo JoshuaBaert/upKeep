@@ -22,12 +22,13 @@ angular.module('upkeep', [
     // Local
     'upkeep.home',
     'upkeep.components',
+    'upkeep.login',
 ]).config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('/', '/home');
 
     $stateProvider.state('login', {
         url: '/login',
-        templateUrl: './views/login.html',
+        component: 'ukLogin',
     }).state('user', {
         url: '/',
         templateUrl: './views/user.html',
@@ -60,6 +61,7 @@ angular.module('upkeep', [
 
 // Sections
 require('./home/home.module');
+require('./login/login.module');
 require('./components/components.module');
 
 // Controllers

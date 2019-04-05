@@ -57,8 +57,12 @@ module.exports = {
             {
                 test: /\.html$/,
                 exclude: /node_modules/,
-                use: { loader: 'html-loader' }
-
+                use: {
+                    loader: 'html-loader',
+                    options: {
+                        attrs: false
+                    },
+                },
             },
             {
                 test: /\.ts$/,

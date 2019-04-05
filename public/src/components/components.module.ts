@@ -4,4 +4,3 @@
     angular.module('upkeep.components', [])
 })();
 
-require('./button/button.component');
