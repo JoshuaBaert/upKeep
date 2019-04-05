@@ -10,10 +10,11 @@ declare const $;
     var openSpeed = 500;
     var openWidth = '100vw';
 
-    angular.module('upKeep').directive('getUser', function () {
+    angular.module('upkeep').directive('getUser', function () {
         return {
             restrict: 'E',
             link: function (scope, element, attrs) {
+                console.log('get-user started', scope);
                 scope.getUser();
             },
         };

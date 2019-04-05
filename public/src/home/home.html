@@ -1,10 +1,6 @@
 <div class="home-main">
-
-    <get-user></get-user>
-
-
-    <div class="title"><h1>Categories Page</h1></div>
-    <div class="list-mini" ng-repeat="list in user.lists track by $index">
+    <div class="title"><h1>Lists</h1></div>
+    <div class="list-mini" ng-repeat="list in vm.user.lists track by $index">
         <a class="list-mini-name" ui-sref="user.list.new({listIndex: $index})">
             <div><h1>{{list.name}}</h1></div>
         </a>
@@ -13,8 +9,6 @@
         </div>
     </div>
 
-
     <ui-view class="side-panel"></ui-view>
-
 
 </div>

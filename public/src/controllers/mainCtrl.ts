@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('upKeep').controller('mainCtrl', function ($scope, mainSvc, $http, $state) {
+    angular.module('upkeep').controller('mainCtrl', function ($scope, mainSvc, $http, $state) {
         $scope.dummy = function () {
             $http.post('/dummy').then(res => {
                 $state.go('user.home');

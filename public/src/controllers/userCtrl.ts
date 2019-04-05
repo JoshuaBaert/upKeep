@@ -4,8 +4,8 @@
 
 (function () {
     'use strict';
-    
-    angular.module('upKeep').controller('userCtrl', function ($scope, mainSvc, $stateParams, $state) {
+
+    angular.module('upkeep').controller('userCtrl', function ($scope, mainSvc, $stateParams, $state) {
 
         $scope.newList = {
             name: undefined,

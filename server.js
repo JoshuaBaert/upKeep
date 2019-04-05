@@ -45,7 +45,7 @@ const apiCtrl = require('./controllers/apiCtrl');
 
 app.use(apiCtrl.checkHits);
 
-app.use(express.static('public'));
+app.use(express.static('public/dist'));
 app.use(bodyParser.json());
 app.use(cors());
 

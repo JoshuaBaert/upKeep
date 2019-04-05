@@ -11,7 +11,7 @@
     };
 
 
-    angular.module('upKeep').service('mainSvc', function ($http, $q, $state) {
+    angular.module('upkeep').service('mainSvc', function ($http, $q, $state) {
 
         function getUser() {
             let gotUser = false;

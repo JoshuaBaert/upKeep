@@ -6,7 +6,7 @@ declare const swal;
 (function () {
     'use strict';
 
-    angular.module('upKeep').controller('listsCtrl', listsCtrl);
+    angular.module('upkeep').controller('listsCtrl', listsCtrl);
 
     function listsCtrl($scope, $stateParams, $state, mainSvc) {
 
