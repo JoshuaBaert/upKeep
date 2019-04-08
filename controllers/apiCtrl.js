@@ -8,11 +8,6 @@ const moment = require('moment');
 
 const db = app.get('db');
 
-//db.createTables([], (err, dbRes) => {
-//	if (err) console.log(err);
-//	else console.log('Tables Reset');
-//});
-
 module.exports = {
 
     checkHits: (req, res, next) => {
