@@ -20,8 +20,9 @@ angular.module('upkeep', [
     'ngMaterial',
 
     // Local
-    'upkeep.home',
     'upkeep.components',
+    'upkeep.home',
+    'upkeep.list',
     'upkeep.login',
 ]).config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when('/', '/home');
@@ -47,7 +48,7 @@ angular.module('upkeep', [
         reload: true,
     }).state('user.list', {
         url: '',
-        templateUrl: './views/list.html',
+        component: 'ukList'
     }).state('user.list.new', {
         url: 'list/:listIndex',
         templateUrl: './views/side/newItem.html',
@@ -60,9 +61,10 @@ angular.module('upkeep', [
 });
 
 // Sections
-require('./home/home.module');
-require('./login/login.module');
 require('./components/components.module');
+require('./home/home.module');
+require('./list/list.module');
+require('./login/login.module');
 
 // Controllers
 require('./controllers/listCtrl');

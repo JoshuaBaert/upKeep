@@ -1,7 +1,6 @@
-
 (function () {
     'use strict';
-    angular.module('upkeep.login', [])
+    angular.module('upkeep.login', []);
 })();
 
 require('./login.component');

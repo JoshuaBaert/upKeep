@@ -6,7 +6,6 @@
     'use strict';
 
     angular.module('upkeep').controller('userCtrl', function ($scope, mainSvc, $stateParams, $state) {
-
         $scope.newList = {
             name: undefined,
             icon: undefined,
