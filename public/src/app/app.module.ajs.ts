@@ -57,5 +57,5 @@ angular.module('upkeep', [
             templateUrl: './views/side/editItem.html',
         });
 
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/login');
     });

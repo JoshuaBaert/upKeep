@@ -8,7 +8,7 @@ declare const require: NodeRequire;
 declare const angular;
 
 // @ts-ignore
-require('./app/app.ajs');
+require('./app/main.ajs');
 
 if (environment.production) {
   enableProdMode();
