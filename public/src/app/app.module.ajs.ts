@@ -15,9 +15,9 @@ angular.module('upkeep', [
         return {
             restrict: 'A',
             template: `
-<div class="background">
-    <ui-view></ui-view>
-</div> 
+                <div class="background">
+                    <ui-view></ui-view>
+                </div>
             `
         }
     })
